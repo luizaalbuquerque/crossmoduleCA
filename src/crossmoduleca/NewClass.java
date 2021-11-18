@@ -11,4 +11,6 @@ package crossmoduleca;
  */
 public class NewClass {
     //teste
+    
+    // luiza e mt burra
 }
