@@ -1,14 +1,14 @@
-
 package crossmoduleca;
+
 import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
  *
- * @author Luiza Cavalcanti 
+ * @author Luiza Cavalcanti
  */
 public class CrossmoduleCA {
-    
+
     private static String username;
     private static String pswd;
 
@@ -40,48 +40,37 @@ public class CrossmoduleCA {
         pswd = aPswd;
     }
 
-
-    
     public static void main(String[] args) throws SQLException {
-        
-   
+
         System.out.println("##################################################");
         System.out.println("############     LOGIN SYSTEM   ##################");
         System.out.println("##################################################\n");
         System.out.println("PLEASE ENTER YOUR USERNAME AND PSWD OR type 0 to exit!\n");
 
         start();
-        
+
     }
-    
-    public static void start() throws SQLException{
-    
-         
+
+    public static void start() throws SQLException {
+
         Scanner scanner = new Scanner(System.in);
-        
+
         System.out.print("Username: ");
         setUsername(scanner.next().toLowerCase());
-        
-            if ("0".equals(username)) {
-                System.exit(0);
-             }
+
+        if ("0".equals(username)) {
+            System.exit(0);
+        }
 
         System.out.print("Password: ");
         setPswd(scanner.next());
-       
-     
-      
+
         Login.login(username, pswd);
-         
-         
+
     }
 
     static void login() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-        
-        
-        
-    }
-    
 
+}

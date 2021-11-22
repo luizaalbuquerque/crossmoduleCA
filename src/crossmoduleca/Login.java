@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Luiza Cavalcanti 
+ * @author Luiza Cavalcanti
  */
 public class Login {
 
@@ -33,24 +33,23 @@ public class Login {
             rs = pstm.executeQuery(query);
 
             if (rscheck.next() == true) { // checking username
-         
 
                 while (rs.next()) {
-                    
+
                     pswd = rs.getString("pswd");
-                    
+
                     if (!pswd.equals(pswdinput)) { // checking password
                         System.out.println("wrog password try again");
                         CrossmoduleCA.login();
 
                     } else {
                         pswd = rs.getString("pswd");
-                        
+
                         System.out.println("\nID " + "\t" + "NAME" + "\t\t\t" + "USERNAME" + "\t" + "ACTIVE" + "\t" + "TYPE");
                         System.out.println("================================================================");
                         System.out.println(rs.getString("id") + "\t" + rs.getString("fullname")
                                 + "\t\t" + rs.getString("username") + "\t\t" + rs.getString("active") + "\t" + rs.getString("usertype") + "\n");
-                    
+
                         // Close the result set, statement and the connection
                         rs.close();
                         rscheck.close();
@@ -58,8 +57,6 @@ public class Login {
                         conn.close();
                     }
                 }
-
- 
 
             } else {
 

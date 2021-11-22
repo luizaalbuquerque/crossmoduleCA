@@ -1,19 +1,17 @@
-
 package crossmoduleca;
 
 /**
  *
- * @author Luiza Cavalcanti 
+ * @author Luiza Cavalcanti
  */
 public class usersdata {
-    
-     
-   private String username;
-   private String fullname;
-   private String usertype;
-   private String pswd;
-   private String gender;
-   private boolean active;
+
+    private String username;
+    private String fullname;
+    private String usertype;
+    private String pswd;
+    private String gender;
+    private boolean active;
 
     /**
      * @return the username
@@ -98,7 +96,5 @@ public class usersdata {
     public void setActive(boolean active) {
         this.active = active;
     }
-    
 
-    
 }

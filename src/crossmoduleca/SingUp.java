@@ -11,24 +11,23 @@ import java.sql.PreparedStatement;
 /**
  *
  * @author Luiza Cavalcanti
- * 
+ *
  */
 public class SingUp {
-    
-    public static void NewAccount () {
-        
+
+    public static void NewAccount() {
+
         String FullName;
         String UserName;
         String Gender;
         String pswd;
-        
-       
+
         Connection conn;
         PreparedStatement pstm = null;
 
         String query = "INSERT INTO `users` VALUES ('FullName','UserName','pswd','user','gender',1)";
 
         conn = new MySQLConection().dbconn();
-}
-    
+    }
+
 }
