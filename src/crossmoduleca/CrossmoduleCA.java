@@ -75,6 +75,10 @@ public class CrossmoduleCA {
          
          
     }
+
+    static void login() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
         
         
         
