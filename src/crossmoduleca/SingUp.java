@@ -17,6 +17,7 @@ public class SingUp {
 
     public static void NewAccount() {
 
+//        variables
         String FullName;
         String UserName;
         String Gender;

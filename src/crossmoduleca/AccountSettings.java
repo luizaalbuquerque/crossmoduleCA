@@ -15,6 +15,7 @@ public class AccountSettings {
 
     public static void FirstAccess(String username, String pswd) {
 
+//        variables
         Connection conn;
         PreparedStatement pstm = null;
 

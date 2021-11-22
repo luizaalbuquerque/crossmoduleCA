@@ -14,6 +14,7 @@ public class MySQLConection {
 
     public static Connection dbconn() {
 
+//        variables
         String url = "jdbc:mysql://localhost:3306/db_crossmoduleCA";
         ///Users/luizaalbuquerque/NetBeansProjects/crossmoduleCA/db Exported";
         String user = "root";
