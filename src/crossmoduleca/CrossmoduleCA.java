@@ -2,6 +2,7 @@ package crossmoduleca;
 
 import java.sql.SQLException;
 import java.util.Scanner;
+import crossmoduleca.usersdata;
 
 /**
  *
@@ -9,36 +10,6 @@ import java.util.Scanner;
  */
 public class CrossmoduleCA {
 
-    private static String username;
-    private static String pswd;
-
-    /**
-     * @return the username
-     */
-    public static String getUsername() {
-        return username;
-    }
-
-    /**
-     * @param aUsername the username to set
-     */
-    public static void setUsername(String aUsername) {
-        username = aUsername;
-    }
-
-    /**
-     * @return the pswd
-     */
-    public static String getPswd() {
-        return pswd;
-    }
-
-    /**
-     * @param aPswd the pswd to set
-     */
-    public static void setPswd(String aPswd) {
-        pswd = aPswd;
-    }
 
     public static void main(String[] args) throws SQLException {
 //
@@ -51,21 +22,22 @@ public class CrossmoduleCA {
 
     }
 
+
+            
     public static void start() throws SQLException {
 
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Username: ");
-        setUsername(scanner.next().toLowerCase());
-
-        if ("0".equals(username)) {
-            System.exit(0);
-        }
+        usersdata.setUsername(scanner.next().toLowerCase());
+    
 
         System.out.print("Password: ");
-        setPswd(scanner.next());
+       usersdata.setPswd(scanner.next());
 
-        Login.login(username, pswd);
+       // Login.login(usersdata.getUsername(),usersdata.getPswd());
+        
+        Login.loginCheck(usersdata.getUsername(),usersdata.getPswd());
 
     }
 

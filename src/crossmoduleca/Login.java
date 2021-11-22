@@ -39,8 +39,8 @@ public class Login {
                     pswd = rs.getString("pswd");
 
                     if (!pswd.equals(pswdinput)) { // checking password
-                        System.out.println("wrog password try again");
-                        CrossmoduleCA.login();
+                        System.out.println("wrong password try again");
+                        
 
                     } else {
                         pswd = rs.getString("pswd");
@@ -61,7 +61,8 @@ public class Login {
             } else {
 //error output for user 
                 System.out.println("User not founded. Try again! Or type 0 to finish");
-                CrossmoduleCA.login();
+                
+               // CrossmoduleCA.login();
             }
 
         } catch (SQLException e) {

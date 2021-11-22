@@ -29,6 +29,8 @@ public class SingUp {
         String query = "INSERT INTO `users` VALUES ('FullName','UserName','pswd','user','gender',1)";
 
         conn = new MySQLConection().dbconn();
+        
     }
+    
 
 }
