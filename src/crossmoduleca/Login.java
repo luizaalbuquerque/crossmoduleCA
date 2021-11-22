@@ -73,4 +73,8 @@ public class Login {
 
     }
 
+    static void login(String username, String pswd) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
