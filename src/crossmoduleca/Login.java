@@ -39,14 +39,14 @@ public class Login {
                     pswd = rs.getString("pswd");
 
                     if (!pswd.equals(pswdinput)) { // checking password
-                        System.out.println("wrong password try again");
+                        System.out.println("wrong password, try again");
                         
 
                     } else {
-                        pswd = rs.getString("pswd");
+                        pswd = rs.getString("pswd"); // show the id of the name loged 
 
-                        System.out.println("\nID " + "\t" + "NAME" + "\t\t\t" + "USERNAME" + "\t" + "ACTIVE" + "\t" + "TYPE");
-                        System.out.println("================================================================");
+                        System.out.println("\nID " + "\t" + "FULL NAME" + "\t\t\t" + "USERNAME" + "\t" + "ACTIVE" + "\t" + "TYPE");
+                        System.out.println("============================================================================");
                         System.out.println(rs.getString("id") + "\t" + rs.getString("fullname")
                                 + "\t\t" + rs.getString("username") + "\t\t" + rs.getString("active") + "\t" + rs.getString("usertype") + "\n");
 

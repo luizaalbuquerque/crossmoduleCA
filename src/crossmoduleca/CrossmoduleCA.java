@@ -16,7 +16,7 @@ public class CrossmoduleCA {
         System.out.println("##################################################");
         System.out.println("############     LOGIN SYSTEM   ##################");
         System.out.println("##################################################\n");
-        System.out.println("PLEASE ENTER YOUR USERNAME AND PSWD OR type 0 to exit!\n");
+        System.out.println("PLEASE ENTER YOUR USERNAME AND PASSWORD OR TYPE 0 TO EXIT!\n");
 
         start();
 
@@ -28,11 +28,11 @@ public class CrossmoduleCA {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Username: ");
+        System.out.print("Username: "); //check username 
         usersdata.setUsername(scanner.next().toLowerCase());
     
 
-        System.out.print("Password: ");
+        System.out.print("Password: "); //check password
        usersdata.setPswd(scanner.next());
 
        // Login.login(usersdata.getUsername(),usersdata.getPswd());
