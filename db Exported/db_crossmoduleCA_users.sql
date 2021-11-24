@@ -23,7 +23,7 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
+  `id` MEDIUMINT NOT NULL AUTO_INCREMENT,
   `fullname` varchar(20) NOT NULL,
   `username` varchar(20) NOT NULL,
   `pswd` varchar(20) NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE `users` (
   `gender` varchar(1) DEFAULT NULL,
   `active` tinyint NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,12 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Edgard Pacheco','edgard','change','poweruser','M',1),(2,'Luiza Ipanema','luiza','change','admin','F',1),(3,'Beatriz Pacheco','bia','change','user','N',0);
+
+INSERT INTO `users` VALUES  (1,'Wallace CCT','wallace','change','poweruser','M',1),
+							(2,'Luiza Cavalcanti','luiza','change','admin','F',1),
+							(3,'Student CCT','CCT','Dublin','admin','N',1),
+                            (4,'Jane Doe','CCTStudent','Pass1234','user','N',0);
+                            
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

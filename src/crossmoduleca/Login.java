@@ -81,15 +81,20 @@ public class Login{
                 System.out.print("Gender: "); //check username
                 
                 String gender = scannerUser.next().toLowerCase();
+                System.out.print("Usertype: "); //check username
+                
+                String usertype = scannerUser.next().toLowerCase();
+                
                 
                 System.out.print("Fullname: "); //check username
                 
                 String fullname = scannerUser.next().toLowerCase();
                 
+                
             
        
                 SingUp signup = new SingUp(); 
-                signup.NewAccountWith( fullname,  user,  pwd,  gender);
+                signup.NewAccountWith( fullname,  user,  pwd, usertype, gender);
                         
                         
                 
