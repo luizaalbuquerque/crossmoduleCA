@@ -14,21 +14,29 @@ import java.sql.PreparedStatement;
  *
  */
 public class SingUp {
+    
+     public String FullName;
+     public String UserName;
+     public String Gender;
+     public String pswd;
 
-    public static void NewAccount() {
-
+    public void NewAccountWith(String fullname, String username, String pswd, String gender) {
+        
+        this.FullName = fullname;
+        this.UserName = username;
+        this.Gender = pswd;
+        this.pswd = gender;
+                
 //        variables
-        String FullName;
-        String UserName;
-        String Gender;
-        String pswd;
-
+       
         Connection conn;
         PreparedStatement pstm = null;
 
-        String query = "INSERT INTO `users` VALUES ('FullName','UserName','pswd','user','gender',1)";
+        String query = "INSERT INTO 'users' VALUES ('" +  this.FullName + "','" +  this.UserName + "','" +  this.pswd + "',' admin, " + this.Gender + "',1)";
 
         conn = new MySQLConection().dbconn();
+        
+        System.out.println("Sign up:" + query );
         
     }
     
