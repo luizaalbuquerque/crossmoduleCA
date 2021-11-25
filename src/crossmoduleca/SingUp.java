@@ -46,6 +46,14 @@ public class SingUp {
        
        conn.close();
        
+// create a Statement from the connection
+Statement statement = conn.createStatement();
+
+// insert the data
+statement.executeUpdate("INSERT INTO Customers " + "VALUES (1001, 'Simpson', 'Mr.', 'Springfield', 2001)");
+
+
+
 
 //rs.close();
 //stmt.close();
