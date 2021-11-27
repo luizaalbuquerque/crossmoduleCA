@@ -10,7 +10,6 @@ import crossmoduleca.usersdata;
  */
 public class CrossmoduleCA {
 
-
     public static void main(String[] args) throws SQLException {
 //
         System.out.println("##################################################");
@@ -22,22 +21,18 @@ public class CrossmoduleCA {
 
     }
 
-
-            
     public static void start() throws SQLException {
 
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Username: "); //check username 
         usersdata.setUsername(scanner.next().toLowerCase());
-    
 
         System.out.print("Password: "); //check password
-       usersdata.setPswd(scanner.next());
+        usersdata.setPswd(scanner.next());
 
-       // Login.login(usersdata.getUsername(),usersdata.getPswd());
-        
-        Login.loginCheck(usersdata.getUsername(),usersdata.getPswd());
+        // Login.login(usersdata.getUsername(),usersdata.getPswd());
+        Login.loginCheck(usersdata.getUsername(), usersdata.getPswd());
 
     }
 

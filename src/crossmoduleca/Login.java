@@ -6,12 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-
 /**
  *
  * @author Luiza Cavalcanti
  */
-public class Login{
+public class Login {
 
     public static String pswdinput;
     public static String username;
@@ -44,7 +43,6 @@ public class Login{
 
                     if (!pswd.equals(pswdinput)) { // checking password
                         System.out.println("wrong password, try again");
-                        
 
                     } else {
                         pswd = rs.getString("pswd"); // show the id of the name loged 
@@ -65,47 +63,38 @@ public class Login{
             } else {
 //error output for user 
                 System.out.println("User not founded. Try again! Or type 0 to finish");
-                 
+
                 System.out.println("would you like to create a new account? ");
-                
+
                 Scanner scannerUser = new Scanner(System.in);
 
                 System.out.print("Username: "); //check username
-                
+
                 String user = scannerUser.next().toLowerCase();
-                
+
                 System.out.print("Password: "); //check username
-                
+
                 String pwd = scannerUser.next().toLowerCase();
-                
+
                 System.out.print("Gender: "); //check username
-                
+
                 String gender = scannerUser.next().toLowerCase();
                 System.out.print("Usertype: "); //check username
-                
-                String usertype = scannerUser.next().toLowerCase();
-                
-                
-                System.out.print("Fullname: "); //check username
-                
-                String fullname = scannerUser.next().toLowerCase();
-                
-                
-            
-       
-                SingUp signup = new SingUp(); 
-                signup.NewAccountWith( fullname,  user,  pwd, usertype, gender);
-                        
-                        
-                
-               
-               //scannerUsername.next().toLowerCase();
-                
-               // CrossmoduleCA.login();
-            
 
-        }} catch (SQLException e) {
-             System.out.print("Not supported yet.");
+                String usertype = scannerUser.next().toLowerCase();
+
+                System.out.print("Fullname: "); //check username
+
+                String fullname = scannerUser.next().toLowerCase();
+
+                SingUp signup = new SingUp();
+                signup.NewAccountWith(fullname, user, pwd, usertype, gender);
+
+                //scannerUsername.next().toLowerCase();
+                // CrossmoduleCA.login();
+            }
+        } catch (SQLException e) {
+            System.out.print("Not supported yet.");
         }
 
     }
@@ -113,5 +102,4 @@ public class Login{
 //    static void login(String username, String pswd) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 //    }
-
 }
