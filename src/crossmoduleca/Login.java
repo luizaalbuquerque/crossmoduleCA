@@ -1,9 +1,6 @@
 package crossmoduleca;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Scanner;
 
 /**
@@ -23,79 +20,90 @@ public class Login {
         Connection conn;
         PreparedStatement pstm = null;
 
-        String query = "SELECT * FROM users WHERE username = '" + username + "'";
+        String query = "SELECT * FROM users";
 
         conn = new MySQLConection().dbconn();
         ResultSet rs = null;
         ResultSet rscheck = null;
+        
+        
+         try {
+            // create a connection
+            Statement stmt = conn.createStatement();
+            //execute the query 
+            stmt.executeUpdate(query);
 
-        try {
-            pstm = conn.prepareStatement(query);
-            rscheck = pstm.executeQuery(query);
-            pstm = conn.prepareStatement(query);
-            rs = pstm.executeQuery(query);
-
-            if (rscheck.next()) { // checking username
-
-                while (rs.next()) {
-
-                    pswd = rs.getString("pswd");
-
-                    if (!pswd.equals(pswdinput)) { // checking password
-                        System.out.println("wrong password, try again");
-
-                    } else {
-                        pswd = rs.getString("pswd"); // show the id of the name loged 
-
-                        System.out.println("\nID " + "\t" + "FULL NAME" + "\t\t\t" + "USERNAME" + "\t" + "ACTIVE" + "\t" + "TYPE");
-                        System.out.println("============================================================================");
-                        System.out.println(rs.getString("id") + "\t" + rs.getString("fullname")
-                                + "\t\t" + rs.getString("username") + "\t\t" + rs.getString("active") + "\t" + rs.getString("usertype") + "\n");
-
-                        // Close the result set, statement and the connection
-                        rs.close();
-                        rscheck.close();
-                        pstm.close();
-                        conn.close();
-                    }
-                }
-
-            } else {
-//error output for user 
-                System.out.println("User not founded. Try again! Or type 0 to finish");
-
-                System.out.println("would you like to create a new account? ");
-
-                Scanner scannerUser = new Scanner(System.in);
-
-                System.out.print("Username: "); //check username
-
-                String user = scannerUser.next().toLowerCase();
-
-                System.out.print("Password: "); //check username
-
-                String pwd = scannerUser.next().toLowerCase();
-
-                System.out.print("Gender: "); //check username
-
-                String gender = scannerUser.next().toLowerCase();
-                System.out.print("Usertype: "); //check username
-
-                String usertype = scannerUser.next().toLowerCase();
-
-                System.out.print("Fullname: "); //check username
-
-                String fullname = scannerUser.next().toLowerCase();
-
-                SingUp signup = new SingUp();
-                signup.NewAccountWith(fullname, user, pwd, usertype, gender);
-
-                //scannerUsername.next().toLowerCase();
-                // CrossmoduleCA.login();
-            }
         } catch (SQLException e) {
-            System.out.print("Not supported yet.");
+            System.out.println("error");
         }
+
+//        try {
+//            pstm = conn.prepareStatement(query);
+//            rscheck = pstm.executeQuery(query);
+//            pstm = conn.prepareStatement(query);
+//            rs = pstm.executeQuery(query);
+//
+//            if (rscheck.next()) { // checking username
+//
+//                while (rs.next()) {
+//
+//                    pswd = rs.getString("pswd");
+//
+//                    if (!pswd.equals(pswdinput)) { // checking password
+//                        System.out.println("wrong password, try again");
+//
+//                    } else {
+//                        pswd = rs.getString("pswd"); // show the id of the name loged 
+//
+//                        System.out.println("\nID " + "\t" + "FULL NAME" + "\t\t\t" + "USERNAME" + "\t" + "ACTIVE" + "\t" + "TYPE");
+//                        System.out.println("============================================================================");
+//                        System.out.println(rs.getString("id") + "\t" + rs.getString("fullname")
+//                                + "\t\t" + rs.getString("username") + "\t\t" + rs.getString("active") + "\t" + rs.getString("usertype") + "\n");
+//
+//                        // Close the result set, statement and the connection
+//                        rs.close();
+//                        rscheck.close();
+//                        pstm.close();
+//                        conn.close();
+//                    }
+//                }
+//
+//            } else {
+////error output for user 
+//                System.out.println("User not founded. Try again! Or type 0 to finish");
+//
+//                System.out.println("would you like to create a new account? ");
+//
+//                Scanner scannerUser = new Scanner(System.in);
+//
+//                System.out.print("Username: "); //check username
+//
+//                String user = scannerUser.next().toLowerCase();
+//
+//                System.out.print("Password: "); //check password
+//
+//                String pwd = scannerUser.next().toLowerCase();
+//
+//                System.out.print("Gender: "); //check gender
+//
+//                String gender = scannerUser.next().toLowerCase();
+//                System.out.print("Usertype: "); //check usertype
+//
+//                String usertype = scannerUser.next().toLowerCase();
+//
+//                System.out.print("Fullname: "); //check fullname
+//
+//                String fullname = scannerUser.next().toLowerCase();
+//
+//                SingUp signup = new SingUp();
+//                signup.NewAccountWith(fullname, user, pwd, usertype, gender);
+//
+//                //scannerUsername.next().toLowerCase();
+//                // CrossmoduleCA.login();
+//            }
+//        } catch (SQLException e) {
+//            System.out.print("Not supported yet.");
+//        }
 
     }
 

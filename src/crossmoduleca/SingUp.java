@@ -40,10 +40,10 @@ public class SingUp {
             // create a connection
             Statement stmt = conn.createStatement();
             //execute the query 
-            ResultSet rs = stmt.executeQuery(query);
+            stmt.executeUpdate(query);
             //insert the data 
-              stmt.executeUpdate("INSERT INTO USERS" + "VALUES(NULL,'" + this.FullName + "','" + this.UserName + "','" + this.pswd + "','" + this.usertype + "','" + this.Gender + "',1)");
-        } catch (Exception e) {
+              //stmt.executeUpdate(query);
+        } catch (SQLException e) {
             System.out.println("error");
         }
 
