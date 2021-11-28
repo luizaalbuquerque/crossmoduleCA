@@ -69,48 +69,50 @@ public class Login {
                         System.out.println(id + "|" + "\t" + "|" + userFullName + "|" + "\t\t" + "|" + showusername + "|" + "\t\t" + "|" + gender + "|" + " \t\t\t" + "|" + pwd + "|" + "\t" + "|" + active + "|" + "\t\t" + "|" + usertype + "\n");
 
                     }
-                    
+
+//                   still in case the user is admin, output two options, edit your own profile or delete an user
                     System.out.println("Choose one option: " + "\n" + "1 - Edit your profile" + " \n" + "2 - Delete an user");
-                    Scanner scanner = new Scanner(System.in);
-                    String option = scanner.next();
+//                    using scanner to store the user choice 
+                    Scanner access = new Scanner(System.in);
+                    String option = access.next();
+//                    checking the choice
                     if (option.equals("1")) {
-                        System.out.println("I want edit my profile");
-
-                        if (scanner.next().equals("yes")) {
-
-                            Scanner scannerUser = new Scanner(System.in);
+                        System.out.println("Do you want to edit your profile?");
+//checking the user choice 
+                        if (access.next().equals("yes")) {
+//option to change the profile 
+                            Scanner scannerUser = new Scanner(System.in); //use scanner to save the user input
 
                             System.out.print("Username: "); //check username
 
-                            String user = scannerUser.next().toLowerCase();
+                            String user = scannerUser.next().toLowerCase(); //store username
 
                             System.out.print("Password: "); //check password
 
-                            String pwd = scannerUser.next().toLowerCase();
+                            String pwd = scannerUser.next().toLowerCase(); //store password
 
                             System.out.print("Gender: "); //check gender
 
-                            String gender = scannerUser.next().toLowerCase();
+                            String gender = scannerUser.next().toLowerCase(); //store gender
                             System.out.print("Usertype: "); //check usertype
 
-                            String usertype = scannerUser.next().toLowerCase();
+                            String usertype = scannerUser.next().toLowerCase();//store user type
 
                             System.out.print("Fullname: "); //check fullname
 
-                            String userfullname = scannerUser.next().toLowerCase();
-
+                            String userfullname = scannerUser.next().toLowerCase(); //store full name 
+// query to update the profile on the DataBase
                             String q = "UPDATE USERS SET fullname = '" + userfullname + "', pswd = '" + pwd + "', gender = '" + gender + "', username = '" + user + "', usertype = '" + usertype + "' where id = " + myID;
                             stmt.executeUpdate(q);
 
-                        } else {
-                            //
                         }
-
+//in case the use choose to delete a user
                     } else if (option.equals("2")) {
-                        System.out.println("I wanna delete user");
-                        System.out.println("Choose an user by ID:");
+                        System.out.println("You chose to delete a user");
+                        System.out.println("Now, choose an user by his ID:");
 
-                        String q = "DELETE FROM USERS where id = " + scanner.next();
+//              query to delete user onn te DataBase by the id                
+                        String q = "DELETE FROM USERS where id = " + access.next();
                         stmt.executeUpdate(q);
 
                     }
@@ -119,48 +121,52 @@ public class Login {
 
                 }
 
+//                if the user don't exist, it will create a new user
             } else {
 
-                System.out.println("User not founded. Try again! Or type 0 to finish");
+//                    System.out.println("User not founded. Try again! Or type 0 to finish");
+                System.out.println("The user don't exits, to create a new account, fill in the following: ");
 
-                System.out.println("would you like to create a new account? ");
-
-                Scanner scannerUser = new Scanner(System.in);
+                Scanner scannerUser = new Scanner(System.in); //using scanner to store the user input 
 
                 System.out.print("Username: "); //check username
 
-                String user = scannerUser.next().toLowerCase();
+                String user = scannerUser.next().toLowerCase(); // store username
 
                 System.out.print("Password: "); //check password
 
-                String pwd = scannerUser.next().toLowerCase();
+                String pwd = scannerUser.next().toLowerCase(); //store password
 
                 System.out.print("Gender: "); //check gender
 
-                String gender = scannerUser.next().toLowerCase();
+                String gender = scannerUser.next().toLowerCase(); //store gender
                 System.out.print("Usertype: "); //check usertype
 
-                String usertype = scannerUser.next().toLowerCase();
+                String usertype = scannerUser.next().toLowerCase(); //store user type
 
                 System.out.print("Fullname: "); //check fullname
 
-                String fullname = scannerUser.next().toLowerCase();
+                String fullname = scannerUser.next().toLowerCase(); //store full name
 
+//                    creting the signup 
                 SingUp signup = new SingUp();
                 signup.NewAccountWith(fullname, user, pwd, usertype, gender);
 
-//         
             }
-
+//creating the erro message for the try-catch
         } catch (SQLException e) {
-            System.out.println("error");
-            e.printStackTrace();
+            System.out.println("Error");
+//            test purpose
+//            e.printStackTrace();
         }
+//        closing the statement 
         stmt.close();
 
+//            closig the result set and the connection 
         rs.close();
         conn.close();
     }
+}
 
 //
 //                    pswd = rs.getString("pswd");
@@ -171,18 +177,4 @@ public class Login {
 //                    } else {
 //                        pswd = rs.getString("pswd"); // show the id of the name loged 
 //
-//                        System.out.println("\nID " + "\t" + "FULL NAME" + "\t\t\t" + "USERNAME" + "\t" + "ACTIVE" + "\t" + "TYPE");
-//                        System.out.println("============================================================================");
-//                        System.out.println(rs.getString("id") + "\t" + rs.getString("fullname")
-//                                + "\t\t" + rs.getString("username") + "\t\t" + rs.getString("active") + "\t" + rs.getString("usertype") + "\n");
-//
-//                        // Close the result set, statement and the connection
-//                        rs.close();
-//        } catch (SQLException e) {
-//            System.out.print("Not supported yet.");
-//        }
-//    }
-//    static void login(String username, String pswd) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-}
+//        
