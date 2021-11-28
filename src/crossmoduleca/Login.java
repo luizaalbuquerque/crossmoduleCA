@@ -44,7 +44,7 @@ public class Login {
                 String myID = rs.getString("id");
 
 //                testing
-                System.out.println("Welcome " + fullname);
+                System.out.println("Welcome, " + fullname);
                 System.out.println("\n");
 
 //                checking if the user type is admin 
@@ -168,7 +168,6 @@ public class Login {
     }
 }
 
-//
 //                    pswd = rs.getString("pswd");
 //
 //                    if (!pswd.equals(pswdinput)) { // checking password
@@ -176,5 +175,4 @@ public class Login {
 //
 //                    } else {
 //                        pswd = rs.getString("pswd"); // show the id of the name loged 
-//
-//        
+
