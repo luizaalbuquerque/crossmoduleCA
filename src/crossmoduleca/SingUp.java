@@ -19,20 +19,24 @@ public class SingUp {
     public String Gender;
     public String pswd;
     public String usertype;
-
-    public void NewAccountWith(String fullname, String username, String pswd, String usertype, String gender) throws SQLException {
+    public int age;
+    public int phone;
+    
+    public void NewAccountWith(String fullname, String username, String pswd, String usertype, String gender, int phone, int age) throws SQLException {
 
         this.FullName = fullname;
         this.UserName = username;
         this.Gender = gender;
         this.pswd = pswd;
         this.usertype = usertype;
+        this.phone = phone;
+        this.age = age;
 //        variables
 
         Connection conn;
         PreparedStatement pstm = null;
 
-        String query = "INSERT INTO USERS (id, fullname, username, pswd, usertype, gender, active) VALUES (NULL,'" + this.FullName + "','" + this.UserName + "','" + this.pswd + "','" + this.usertype + "','" + this.Gender + "',1)";
+        String query = "INSERT INTO USERS (id, fullname, username, pswd, usertype, gender, active, age, phone) VALUES (NULL,'" + this.FullName + "','" + this.UserName + "','" + this.pswd + "','" + this.usertype + "','" + this.Gender + "','" + 1 + this.phone + "','" + this.age + "' )";
 
         conn = new MySQLConection().dbconn();
 

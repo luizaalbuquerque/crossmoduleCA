@@ -12,6 +12,8 @@ public class usersdata {
     static String pswd;
     static String gender;
     static boolean active;
+    static int phone; 
+    static int age;
 
     /**
      * @return the username
@@ -95,6 +97,35 @@ public class usersdata {
      */
     public static void setActive(boolean active) {
         usersdata.active = active;
+    }
+
+    /**
+     * @return the phone
+     */
+    public static int  getphone() {
+        return usersdata.phone;
+    }
+
+    /**
+     * @param pswd the phone to set
+     */
+    public static void setPhone(int phone) {
+        usersdata.phone = phone;
+    }
+    
+    
+    /**
+     * @return the age
+     */
+    public static int getAge() {
+        return usersdata.age;
+    }
+
+    /**
+     * @param pswd the age to set
+     */
+    public static void setAge(int age) {
+        usersdata.age = age;
     }
 
 }

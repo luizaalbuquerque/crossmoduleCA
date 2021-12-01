@@ -1,5 +1,7 @@
 package crossmoduleca;
 
+import static crossmoduleca.usersdata.age;
+import static crossmoduleca.usersdata.phone;
 import java.sql.*;
 import java.util.Scanner;
 
@@ -55,7 +57,7 @@ public class Login {
                     allUsers = stmt.executeQuery("SELECT * FROM USERS");
 
 //          show all table in the DataBase, using the while loop to print all rows
-                    System.out.println("\nID " + "|" + "\t" + "|" + "FULL NAME" + "|" + "\t\t" + "|" + "USERNAME" + "|" + "\t\t" + "|" + "GENDER" + "|" + " \t\t" + "|" + "PASSWORD" + "|" + "\t" + "|" + "ACTIVE" + "|" + "\t" + "|" + "TYPE");
+                    System.out.println("\nID " + "|" + "\t" + "|" + "FULL NAME" + "|" + "\t\t" + "|" + "USERNAME" + "|" + "\t\t" + "|" + "GENDER" + "|" + " \t\t" + "|" + "PASSWORD" + "|" + "\t" + "|" + "ACTIVE" + "|" + "\t" + "|" + "TYPE" + "PHONE" + "|" + "\t" + "|" + "AGE");
 
                     while (allUsers.next()) {
                         String id = allUsers.getString("id");
@@ -66,7 +68,7 @@ public class Login {
                         String gender = allUsers.getString("gender");
                         String active = allUsers.getString("active");
                         System.out.println("----------------------------------------------------------------------------------------------------------------------------");
-                        System.out.println(id + "|" + "\t" + "|" + userFullName + "|" + "\t\t" + "|" + showusername + "|" + "\t\t" + "|" + gender + "|" + " \t\t\t" + "|" + pwd + "|" + "\t" + "|" + active + "|" + "\t\t" + "|" + usertype + "\n");
+                        System.out.println(id + "|" + "\t" + "|" + userFullName + "|" + "\t\t" + "|" + showusername + "|" + "\t\t" + "|" + gender + "|" + " \t\t\t" + "|" + pwd + "|" + "\t" + "|" + active + "|" + "\t\t" + "|" + usertype + "\n" + phone + "|" + "\t\t" + "|" + age + "\n");
 
                     }
 
@@ -101,8 +103,17 @@ public class Login {
                             System.out.print("Fullname: "); //check fullname
 
                             String userfullname = scannerUser.next().toLowerCase(); //store full name 
+
+                            System.out.print("Phone: "); //check phone
+
+                            String phone = scannerUser.next().toLowerCase(); //store phone
+
+                            System.out.print("AGE: "); //check age
+
+                            String age = scannerUser.next().toLowerCase(); //store age
+
 // query to update the profile on the DataBase
-                            String q = "UPDATE USERS SET fullname = '" + userfullname + "', pswd = '" + pwd + "', gender = '" + gender + "', username = '" + user + "', usertype = '" + usertype + "' where id = " + myID;
+                            String q = "UPDATE USERS SET fullname = '" + userfullname + "', pswd = '" + pwd + "', gender = '" + gender + "', username = '" + user + "', usertype = '" + usertype + "' where id = " + myID + "', phone = '" + phone + "', age = '" + age;
                             stmt.executeUpdate(q);
 
                         }
@@ -148,9 +159,18 @@ public class Login {
 
                 String fullname = scannerUser.next().toLowerCase(); //store full name
 
+                System.out.print("Phone: "); //check phone
+
+                String phone = scannerUser.next().toLowerCase(); //store phone
+
+                System.out.print("AGE: "); //check age
+
+                String age = scannerUser.next().toLowerCase(); //store age
+
 //                    creting the signup 
                 SingUp signup = new SingUp();
-                signup.NewAccountWith(fullname, user, pwd, usertype, gender);
+               
+              //  signup.NewAccountWith(fullname, user, pwd, usertype, gender, phone, age);
 
             }
 //creating the erro message for the try-catch
