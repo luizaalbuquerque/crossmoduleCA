@@ -14,6 +14,8 @@ public class Login {
 //    variables
     public static String pswdinput;
     public static String username;
+    public static String userAdmin;
+    
 
     public static void loginCheck(String username, String pswd) throws SQLException {
 
@@ -50,8 +52,10 @@ public class Login {
                 System.out.println("\n");
 
 //                checking if the user type is admin 
-                String userType = rs.getString("usertype");
-                if (userType.equals("admin")) {
+               
+                Login.userAdmin = rs.getString("usertype");
+                        
+                if (  Login.userAdmin.equals("admin")) {
 
 //                   select all table 
                     allUsers = stmt.executeQuery("SELECT * FROM USERS");
@@ -66,9 +70,10 @@ public class Login {
                         String pwd = allUsers.getString("pswd");
                         String usertype = allUsers.getString("usertype");
                         String gender = allUsers.getString("gender");
-                        String active = allUsers.getString("active");
+                        String useractive = allUsers.getString("active");
+                       String phone = allUsers.getString("phone");
                         System.out.println("----------------------------------------------------------------------------------------------------------------------------");
-                        System.out.println(id + "|" + "\t" + "|" + userFullName + "|" + "\t\t" + "|" + showusername + "|" + "\t\t" + "|" + gender + "|" + " \t\t\t" + "|" + pwd + "|" + "\t" + "|" + active + "|" + "\t\t" + "|" + usertype + "\n" + phone + "|" + "\t\t" + "|" + "\n");
+                        System.out.println(id + "|" + "\t" + "|" + userFullName + "|" + "\t\t" + "|" + showusername + "|" + "\t\t" + "|" + gender + "|" + " \t\t\t" + "|" + pwd + "|" + "\t" + "|" + useractive + "|" + "\t\t" + "|" + usertype + "\n" + phone + "|" + "\t\t" + "|");
 
                     }
 
@@ -87,33 +92,36 @@ public class Login {
 
                             System.out.print("Username: "); //check username
 
-                            String user = scannerUser.next().toLowerCase(); //store username
+                            String user = scannerUser.nextLine().toLowerCase(); //store username
 
                             System.out.print("Password: "); //check password
 
-                            String pwd = scannerUser.next().toLowerCase(); //store password
+                            String pwd = scannerUser.nextLine().toLowerCase(); //store password
 
                             System.out.print("Gender: "); //check gender
 
-                            String gender = scannerUser.next().toLowerCase(); //store gender
+                            String gender = scannerUser.nextLine().toLowerCase(); //store gender
                             System.out.print("Usertype: "); //check usertype
 
-                            String usertype = scannerUser.next().toLowerCase();//store user type
+                            String usertype = scannerUser.nextLine().toLowerCase();//store user type
 
                             System.out.print("Fullname: "); //check fullname
 
-                            String userfullname = scannerUser.next().toLowerCase(); //store full name 
+                            String userfullname = scannerUser.nextLine().toLowerCase(); //store full name 
+
+                            System.out.print("use 1 for active and 0 for unactive: "); //check activity
+
+                            String useractive = scannerUser.nextLine().toLowerCase(); //store activity
 
                             System.out.print("Phone: "); //check phone
 
-                            String phone = scannerUser.next().toLowerCase(); //store phone
+                            String phone = scannerUser.nextLine().toLowerCase(); //store phone
 
 //                            System.out.print("AGE: "); //check age
 //
 //                            String age = scannerUser.next().toLowerCase(); //store age
-
 // query to update the profile on the DataBase
-                            String q = "UPDATE USERS SET fullname = '" + userfullname + "', pswd = '" + pwd + "', gender = '" + gender + "', username = '" + user + "', usertype = '" + usertype + "' where id = " + myID + "', phone = '" + phone;
+                            String q = "UPDATE USERS SET fullname = '" + userfullname + "', pswd = '" + pwd + "', gender = '" + gender + "', username = '" + user + "', usertype = '" + usertype + "', active = '" + useractive + "', phone = '" + phone + "' where id = " + myID;
                             stmt.executeUpdate(q);
 
                         }
@@ -142,45 +150,98 @@ public class Login {
 
                 System.out.print("Username: "); //check username
 
-                String user = scannerUser.next().toLowerCase(); // store username
+                String user = scannerUser.nextLine().toLowerCase(); // store username
 
                 System.out.print("Password: "); //check password
 
-                String pwd = scannerUser.next().toLowerCase(); //store password
+                String pwd = scannerUser.nextLine().toLowerCase(); //store password
 
                 System.out.print("Gender: "); //check gender
 
-                String gender = scannerUser.next().toLowerCase(); //store gender
+                String gender = scannerUser.nextLine().toLowerCase(); //store gender
                 System.out.print("Usertype: "); //check usertype
 
-                String usertype = scannerUser.next().toLowerCase(); //store user type
+                String usertype = scannerUser.nextLine().toLowerCase(); //store user type
 
                 System.out.print("Fullname: "); //check fullname
 
-                String userfullname = scannerUser.next().toLowerCase(); //store full name
+                String userfullname = scannerUser.nextLine().toLowerCase(); //store full name
+
+                System.out.print("use 1 for active and 0 for unactive: "); //check activity
+
+                String useractive = scannerUser.nextLine().toLowerCase(); //store activity
 
                 System.out.print("Phone: "); //check phone
 
-                String phone = scannerUser.next().toLowerCase(); //store phone
+                String phone = scannerUser.nextLine().toLowerCase(); //store phone
 
 //                System.out.print("AGE: "); //check age
 //
 //                String age = scannerUser.next().toLowerCase(); //store age
-
 //                    creting the signup 
                 SingUp signup = new SingUp();
-               
+
 //               
 ////                String ageuser=String.valueOf(age);  
 //                String phoneuser=String.valueOf(phone);  
-                signup.NewAccountWith(userfullname, user, pwd, usertype, gender, phone);
+                signup.NewAccountWith(userfullname, user, pwd, usertype, gender, useractive, phone);
 
-            }
+            }else{
+                    
+                     //still in case the user is admin, output two options, edit your own profile or delete an user
+                    System.out.println("Choose one option: " + "\n" + "1 - Edit your profile" + " \n" + "2 - Delete an user");
+//                    using scanner to store the user choice 
+                    Scanner access = new Scanner(System.in);
+                    String option = access.next();
+//                    checking the choice
+                    if (option.equals("1")) {
+                        System.out.println("Do you want to edit your profile?");
+//checking the user choice 
+                        if (access.next().equals("yes")) {
+//option to change the profile 
+                            Scanner scannerUser = new Scanner(System.in); //use scanner to save the user input
+
+                            System.out.print("Username: "); //check username
+
+                            String user = scannerUser.nextLine().toLowerCase(); //store username
+
+                            System.out.print("Password: "); //check password
+
+                            String pwd = scannerUser.nextLine().toLowerCase(); //store password
+
+                            System.out.print("Gender: "); //check gender
+
+                            String gender = scannerUser.nextLine().toLowerCase(); //store gender
+                            System.out.print("Usertype: "); //check usertype
+
+                            String usertype = scannerUser.nextLine().toLowerCase();//store user type
+
+                            System.out.print("Fullname: "); //check fullname
+
+                            String userfullname = scannerUser.nextLine().toLowerCase(); //store full name 
+
+                            System.out.print("use 1 for active and 0 for unactive: "); //check activity
+
+                            String useractive = scannerUser.nextLine().toLowerCase(); //store activity
+
+                            System.out.print("Phone: "); //check phone
+
+                            String phone = scannerUser.nextLine().toLowerCase(); //store phone
+
+//                            System.out.print("AGE: "); //check age
+//
+//                            String age = scannerUser.next().toLowerCase(); //store age
+// query to update the profile on the DataBase
+                            String q = "UPDATE USERS SET fullname = '" + userfullname + "', pswd = '" + pwd + "', gender = '" + gender + "', username = '" + user + "', usertype = '" + usertype + "', active = '" + useractive + "', phone = '" + phone + "' where id = " + myID;
+                            stmt.executeUpdate(q);
+
+                        
+                    }
 //creating the erro message for the try-catch
         } catch (SQLException e) {
             System.out.println("Error");
 //            test purpose
-//            e.printStackTrace();
+            e.printStackTrace();
         }
 //        closing the statement 
         stmt.close();
