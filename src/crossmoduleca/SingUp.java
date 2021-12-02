@@ -19,10 +19,9 @@ public class SingUp {
     public String Gender;
     public String pswd;
     public String usertype;
-    public int age;
     public int phone;
     
-    public void NewAccountWith(String fullname, String username, String pswd, String usertype, String gender, int phone, int age) throws SQLException {
+    public void NewAccountWith(String fullname, String username, String pswd, String usertype, String gender, int phone) throws SQLException {
 
         this.FullName = fullname;
         this.UserName = username;
@@ -30,13 +29,13 @@ public class SingUp {
         this.pswd = pswd;
         this.usertype = usertype;
         this.phone = phone;
-        this.age = age;
+       
 //        variables
 
         Connection conn;
         PreparedStatement pstm = null;
 
-        String query = "INSERT INTO USERS (id, fullname, username, pswd, usertype, gender, active, age, phone) VALUES (NULL,'" + this.FullName + "','" + this.UserName + "','" + this.pswd + "','" + this.usertype + "','" + this.Gender + "','" + 1 + this.phone + "','" + this.age + "' )";
+        String query = "INSERT INTO USERS (id, fullname, username, pswd, usertype, gender, active, phone) VALUES (NULL,'" + this.FullName + "','" + this.UserName + "','" + this.pswd + "','" + this.usertype + "','" + this.Gender + "','" + 1 + this.phone + "','" + "' )";
 
         conn = new MySQLConection().dbconn();
 
@@ -64,6 +63,10 @@ public class SingUp {
 //
         System.out.println("Sign up:" + query);
 
+    }
+
+    void NewAccountWith(String fullname, String user, String pwd, String usertype, String gender, String phone) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

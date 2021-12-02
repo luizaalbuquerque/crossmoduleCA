@@ -13,7 +13,7 @@ public class usersdata {
     static String gender;
     static boolean active;
     static int phone; 
-    static int age;
+
 
     /**
      * @return the username
@@ -113,19 +113,6 @@ public class usersdata {
         usersdata.phone = phone;
     }
     
-    
-    /**
-     * @return the age
-     */
-    public static int getAge() {
-        return usersdata.age;
-    }
-
-    /**
-     * @param pswd the age to set
-     */
-    public static void setAge(int age) {
-        usersdata.age = age;
-    }
+   
 
 }
