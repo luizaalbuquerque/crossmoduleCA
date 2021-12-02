@@ -23,6 +23,7 @@ public class CrossmoduleCA {
 
     public static void start() throws SQLException {
 
+//       using scanner to save input
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Username: "); //check username 
@@ -31,7 +32,6 @@ public class CrossmoduleCA {
         System.out.print("Password: "); //check password
         usersdata.setPswd(scanner.next());
 
-        // Login.login(usersdata.getUsername(),usersdata.getPswd());
         Login.loginCheck(usersdata.getUsername(), usersdata.getPswd());
 
     }
