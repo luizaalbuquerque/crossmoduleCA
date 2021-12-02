@@ -1,7 +1,5 @@
 package crossmoduleca;
 
-//import static crossmoduleca.usersdata.age;
-import static crossmoduleca.usersdata.phone;
 import java.sql.*;
 import java.util.Scanner;
 

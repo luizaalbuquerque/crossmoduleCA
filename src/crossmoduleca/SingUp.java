@@ -21,8 +21,7 @@ public class SingUp {
     public String usertype;
     public String active;
     public String phone;
-    
-    
+
     public void NewAccountWith(String fullname, String username, String pswd, String usertype, String gender, String useractive, String phone) throws SQLException {
 
         this.fullName = fullname;
@@ -32,13 +31,12 @@ public class SingUp {
         this.usertype = usertype;
         this.phone = phone;
         this.active = useractive;
-       
-//        variables
 
+//        variables
         Connection conn;
         PreparedStatement pstm = null;
 
-        String query = "INSERT INTO USERS (id, fullname, username, pswd, usertype, gender, active, phone) VALUES (NULL,'" + this.fullName + "','" + this.userName + "','" + this.pswd + "','" + this.usertype + "','" + this.gender + "','" + this.active + "','" + this.phone +"')";
+        String query = "INSERT INTO USERS (id, fullname, username, pswd, usertype, gender, active, phone) VALUES (NULL,'" + this.fullName + "','" + this.userName + "','" + this.pswd + "','" + this.usertype + "','" + this.gender + "','" + this.active + "','" + this.phone + "')";
 
         conn = new MySQLConection().dbconn();
 
@@ -48,20 +46,18 @@ public class SingUp {
             //execute the query 
             stmt.executeUpdate(query);
             //insert the data 
-              //stmt.executeUpdate(query);
+            //stmt.executeUpdate(query);
         } catch (SQLException e) {
             System.out.println("error on INSERT");
-          e.printStackTrace();
+            e.printStackTrace();
         }
 
         conn.close();
 
 // create a Statement from the connection
-      //  Statement statement = conn.createStatement();
-
+        //  Statement statement = conn.createStatement();
 // insert the data
-     //   statement.executeUpdate("INSERT INTO Customers " + "VALUES (1001, 'Simpson', 'Mr.', 'Springfield', 2001)");
-
+        //   statement.executeUpdate("INSERT INTO Customers " + "VALUES (1001, 'Simpson', 'Mr.', 'Springfield', 2001)");
 //rs.close();
 //stmt.close();
 //

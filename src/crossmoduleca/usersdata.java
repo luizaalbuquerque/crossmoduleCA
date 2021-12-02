@@ -12,60 +12,59 @@ public class usersdata {
     static String pswd;
     static String gender;
     static boolean active;
-    static int phone; 
-
+    static int phone;
 
     /**
-     * @return the username
+     * @return username
      */
     public static String getUsername() {
         return username;
     }
 
     /**
-     * @param username the username to set
+     * @param username to set
      */
     public static void setUsername(String username) {
         usersdata.username = username;
     }
 
     /**
-     * @return the fullname
+     * @return fullname
      */
     public static String getFullname() {
         return fullname;
     }
 
     /**
-     * @param fullname the fullname to set
+     * @param fullname to set
      */
     public static void setFullname(String fullname) {
-         usersdata.fullname = fullname;
+        usersdata.fullname = fullname;
     }
 
     /**
-     * @return the usertype
+     * @return usertype
      */
     public static String getUsertype() {
         return usersdata.usertype;
     }
 
     /**
-     * @param usertype the usertype to set
+     * @param usertype to set
      */
     public static void setUsertype(String usertype) {
-         usersdata.usertype = usertype;
+        usersdata.usertype = usertype;
     }
 
     /**
-     * @return the pswd
+     * @return password
      */
-    public static String  getPswd() {
+    public static String getPswd() {
         return usersdata.pswd;
     }
 
     /**
-     * @param pswd the pswd to set
+     * @param pswd to set
      */
     public static void setPswd(String pswd) {
         usersdata.pswd = pswd;
@@ -79,7 +78,7 @@ public class usersdata {
     }
 
     /**
-     * @param gender the gender to set
+     * @param gender to set
      */
     public static void setGender(String gender) {
         usersdata.gender = gender;
@@ -93,7 +92,7 @@ public class usersdata {
     }
 
     /**
-     * @param active the active to set
+     * @param active to set
      */
     public static void setActive(boolean active) {
         usersdata.active = active;
@@ -102,17 +101,15 @@ public class usersdata {
     /**
      * @return the phone
      */
-    public static int  getphone() {
+    public static int getphone() {
         return usersdata.phone;
     }
 
     /**
-     * @param pswd the phone to set
+     * @param set phone
      */
     public static void setPhone(int phone) {
         usersdata.phone = phone;
     }
-    
-   
 
 }
