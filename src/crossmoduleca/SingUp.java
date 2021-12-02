@@ -13,6 +13,7 @@ import java.sql.*;
  *
  */
 public class SingUp {
+//    variables
 
     public String fullName;
     public String userName;
@@ -32,41 +33,29 @@ public class SingUp {
         this.phone = phone;
         this.active = useractive;
 
-//        variables
+//        connecting with DB
         Connection conn;
-        PreparedStatement pstm = null;
 
-        String query = "INSERT INTO USERS (id, fullname, username, pswd, usertype, gender, active, phone) VALUES (NULL,'" + this.fullName + "','" + this.userName + "','" + this.pswd + "','" + this.usertype + "','" + this.gender + "','" + this.active + "','" + this.phone + "')";
+        String query = "INSERT INTO USERS (id, fullname, username, pswd, usertype, gender, active, phone) "
+                + "VALUES (NULL,'" + this.fullName + "','" + this.userName + "','" + this.pswd + "','" + this.usertype + "','" + this.gender + "','" + this.active + "','" + this.phone + "')";
 
+//        DB connetion
         conn = new MySQLConection().dbconn();
 
         try {
             // create a connection
             Statement stmt = conn.createStatement();
-            //execute the query 
+            //execute the query and insert the data 
             stmt.executeUpdate(query);
-            //insert the data 
-            //stmt.executeUpdate(query);
-        } catch (SQLException e) {
-            System.out.println("error on INSERT");
-            e.printStackTrace();
-        }
 
+        } catch (SQLException e) {
+            System.out.println("error ");
+//            e.printStackTrace();
+        }
         conn.close();
 
-// create a Statement from the connection
-        //  Statement statement = conn.createStatement();
-// insert the data
-        //   statement.executeUpdate("INSERT INTO Customers " + "VALUES (1001, 'Simpson', 'Mr.', 'Springfield', 2001)");
-//rs.close();
-//stmt.close();
-//
         System.out.println("Sign up:" + query);
 
     }
 
-//    void NewAccountWith(String fullname, String user, String pwd, String usertype, String gender, String phone) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
 }
