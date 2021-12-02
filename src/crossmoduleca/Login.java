@@ -66,8 +66,8 @@ public class Login {
                         String gender = allUsers.getString("gender");
                         String useractive = allUsers.getString("active");
                         String phone = allUsers.getString("phone");
-                        System.out.println("----------------------------------------------------------------------------------------------------------------------------");
-                        System.out.println(id + "|" + "\t" + "|" + userFullName + "|" + "\t\t" + "|" + showusername + "|" + "\t\t" + "|" + gender + "|" + " \t\t\t" + "|" + pwd + "|" + "\t" + "|" + useractive + "|" + "\t\t" + "|" + usertype +  "|" +"\n" + "|" + phone + "|" + "\t\t" + "|");
+                        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
+                        System.out.println(id + "|" + "\t" + "|" + userFullName + "|" + "\t\t" + "|" + showusername + "|" + "\t\t" + "|" + gender + "|" + " \t\t\t" + "|" + pwd + "|" + "\t" + "|" + useractive + "|" + "\t\t" + "|" + usertype +  "|" +"\t" + "|" + phone + "|"+"\n\n" );
 
                     }
 
@@ -131,13 +131,13 @@ public class Login {
 
                 } else {
 
-                    System.out.println("Choose one option: " + "\n" + "1 - Edit your profile" + " \n" + "2 - resolve a linear equation ");
+                    System.out.println("Choose one option: " + "\n" + "1 - Edit your profile" + " \n" + "2 - Solve a linear equation ");
 //                    using scanner to store the user choice 
                     Scanner access = new Scanner(System.in);
                     String option = access.next();
 //                    checking the choice
 
-                    System.out.println("Do you want to edit your profile?");
+                    System.out.println("Which type of equation would you like to solve? \n 1-Two variables \n 2-Three variables");
 //checking the user choice 
                     if (access.next().equals("yes")) {
 //option to change the profile 
