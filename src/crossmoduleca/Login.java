@@ -35,51 +35,48 @@ public class Login {
             //execute the query 
             rs = stmt.executeQuery(query);
 
-//            checking boolean ResultSet, if it is true, do the folling: 
+//            checking boolean ResultSet, is false, do the folling: (in case the user don't exit)
             if (!rs.next()) {
-                
-                
-                
+                System.out.println("The user don't exits, to create a new account, fill in the following: ");
 
-                        System.out.println("The user don't exits, to create a new account, fill in the following: ");
+                Scanner scannerUser = new Scanner(System.in); //using scanner to store the user input 
 
-                        Scanner scannerUser = new Scanner(System.in); //using scanner to store the user input 
+                System.out.print("Username: "); //check username
 
-                        System.out.print("Username: "); //check username
+                String user = scannerUser.nextLine().toLowerCase(); // store username
 
-                        String user = scannerUser.nextLine().toLowerCase(); // store username
+                System.out.print("Password: "); //check password
 
-                        System.out.print("Password: "); //check password
+                String pwd = scannerUser.nextLine().toLowerCase(); //store password
 
-                        String pwd = scannerUser.nextLine().toLowerCase(); //store password
+                System.out.print("(use a single letter) Gender: "); //check gender
 
-                        System.out.print("(use a single letter) Gender: "); //check gender
+                String gender = scannerUser.nextLine().toLowerCase(); //store gender
 
-                        String gender = scannerUser.nextLine().toLowerCase(); //store gender
+                System.out.print("(admin or regular) Usertype:"); //check usertype
 
-                        System.out.print("(admin or regular) Usertype:"); //check usertype
+                String usertype = scannerUser.nextLine().toLowerCase(); //store user type
 
-                        String usertype = scannerUser.nextLine().toLowerCase(); //store user type
+                System.out.print("Fullname: "); //check fullname
 
-                        System.out.print("Fullname: "); //check fullname
+                String userfullname = scannerUser.nextLine().toLowerCase(); //store full name
 
-                        String userfullname = scannerUser.nextLine().toLowerCase(); //store full name
+                System.out.print("use 1 for active and 0 for unactive: "); //check activity
 
-                        System.out.print("use 1 for active and 0 for unactive: "); //check activity
+                String useractive = scannerUser.nextLine().toLowerCase(); //store activity
 
-                        String useractive = scannerUser.nextLine().toLowerCase(); //store activity
+                System.out.print("Phone: "); //check phone
 
-                        System.out.print("Phone: "); //check phone
-
-                        String phone = scannerUser.nextLine().toLowerCase(); //store phone
+                String phone = scannerUser.nextLine().toLowerCase(); //store phone
 
 //                    creting the signup 
-                        SingUp signup = new SingUp();
-                        signup.NewAccountWith(userfullname, user, pwd, usertype, gender, useractive, phone);
+                SingUp signup = new SingUp();
+                signup.NewAccountWith(userfullname, user, pwd, usertype, gender, useractive, phone);
 
-                    }
-            else{
-                
+            } 
+//            if the user exist, will do the following:
+            
+            else {
 
 //                assigning variables fullname and id 
                 String fullname = rs.getString("fullname");
@@ -98,7 +95,7 @@ public class Login {
                     allUsers = stmt.executeQuery("SELECT * FROM USERS");
 
 //          show all table in the DataBase, using the while loop to print all rows
-                    System.out.println("\nID " + "|" + "\t" + "|" + "FULL NAME" + "|" + "\t\t" + "|" + "USERNAME" + "|" + "\t\t" + "|" + "GENDER" + "|" + " \t\t" + "|" + "PASSWORD" + "|" + "\t" + "|" + "ACTIVE" + "|" + "\t" + "|" + "TYPE" + "|" + "\t\t" + "|" +"PHONE" + "|" );
+                    System.out.println("\nID " + "|" + "\t" + "|" + "FULL NAME" + "|" + "\t\t" + "|" + "USERNAME" + "|" + "\t\t" + "|" + "GENDER" + "|" + " \t\t" + "|" + "PASSWORD" + "|" + "\t" + "|" + "ACTIVE" + "|" + "\t" + "|" + "TYPE" + "|" + "\t\t" + "|" + "PHONE" + "|");
 
                     while (allUsers.next()) {
                         String id = allUsers.getString("id");
@@ -110,7 +107,7 @@ public class Login {
                         String useractive = allUsers.getString("active");
                         String phone = allUsers.getString("phone");
                         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
-                        System.out.println(id + "|" + "\t" + "|" + userFullName + "|" + "\t\t" + "|" + showusername + "|" + "\t\t" + "|" + gender + "|" + " \t\t\t" + "|" + pwd + "|" + "\t" + "|" + useractive + "|" + "\t\t" + "|" + usertype +  "|" +"\t" + "|" + phone + "|"+"\n\n" );
+                        System.out.println(id + "|" + "\t" + "|" + userFullName + "|" + "\t\t" + "|" + showusername + "|" + "\t\t" + "|" + gender + "|" + " \t\t\t" + "|" + pwd + "|" + "\t" + "|" + useractive + "|" + "\t\t" + "|" + usertype + "|" + "\t" + "|" + phone + "|" + "\n\n");
 
                     }
 
