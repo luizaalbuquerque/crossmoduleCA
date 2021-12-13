@@ -59,9 +59,11 @@ public class LinearEquations {
                 
 //                adding
             case 3:
+//                swing
                 row1_2 = Integer.parseInt(JOptionPane.showInputDialog(null, "What is the number of rows for the Matrices 1 and 2?"));
                 column1_2 = Integer.parseInt(JOptionPane.showInputDialog(null, "What is the number of columns for the Matrices 1 and 2?"));
 
+                
                 int[][] matrix_1 = new int[row1_2][column1_2];
                 int[][] matrix_2 = new int[row1_2][column1_2];
                 int[][] adding = new int[row1_2][column1_2];
@@ -101,25 +103,25 @@ public class LinearEquations {
 
                 for (x = 0; x < row2nd1_2; x++) {
                     for (k = 0; k < column2nd1_2; k++) {
-                        matrix1_2[x][k] = Integer.parseInt(JOptionPane.showInputDialog(null, "Type a value for the Matrix 1"));
-                        answer = answer + matrix1_2[x][k] + "-";
+                        matrix1_2[x][k] = Integer.parseInt(JOptionPane.showInputDialog(null, "Type a value for the Matrix 1, row by row"));
+                        answer = answer + matrix1_2[x][k] + ".";
                     }
                 }
 
                 for (x = 0; x < row2nd1_2; x++) {
                     for (k = 0; k < column2nd1_2; k++) {
-                        matrix2_2[x][k] = Integer.parseInt(JOptionPane.showInputDialog(null, "Type a value for the Matrix 2"));
-                        answer2nd = answer2nd + matrix2_2[x][k] + "-";
+                        matrix2_2[x][k] = Integer.parseInt(JOptionPane.showInputDialog(null, "Type a value for the Matrix 2, row by row "));
+                        answer2nd = answer2nd + matrix2_2[x][k] + ".";
                     }
                 }
 
                 for (x = 0; x < row2nd1_2; x++) {
                     for (k = 0; k < column2nd1_2; k++) {
                         substraction[x][k] = matrix1_2[x][k] - matrix2_2[x][k];
-                        answer3rd = answer3rd + substraction[x][k] + "-";
+                        answer3rd = answer3rd + substraction[x][k] + ".";
                     }
                 }
-
+// JOptionPane.showMessageDialog(null, "The Final Matrix is: \n" + answer + "\n" + answer2nd + "\n" + answer3rd);
                 break;
 
 //                exit the program 
@@ -127,6 +129,6 @@ public class LinearEquations {
             return;
         }
 
-        JOptionPane.showMessageDialog(null, "The Final Matrix is: \n" + answer + "\n" + answer2nd + "\n" + answer3rd);
+        JOptionPane.showMessageDialog(null, "Matrix 1: \n" + answer + "\n" + "Matrix 2: \n" + answer2nd + "\n" + "The result of the final Matrix is: \n" + answer3rd);
     }
 }
