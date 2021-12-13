@@ -1,70 +1,132 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package crossmoduleca;
 
-import java.util.Scanner;
+import javax.swing.*;
 
-/**
- *
- * @author luizaalbuquerque
- */
 public class LinearEquations {
 
-    public static void main (String arg[]){
+    public static void main(String args[]) {
 
-       
-
-        System.out.println("----- 3 variable linear euqation-----");
-
-         Scanner userInput = new Scanner(System.in);
-         
-            char[] variable = {'x', 'y', 'z'};
+//        declaring variables 
+        int x, k, row1_2, column1_2, row2nd1_2, column2nd1_2;
+        String answer = "", answer2nd = "", answer3rd = "";
+        String option;
+//        swing
+        option = JOptionPane.showInputDialog("Calculate Matrices:\n (Choose on option by number) \n"
+                + "1 - Multiplying \n"
+                + "2 - Dividing \n"
+                + "3 - Adding \n"
+                + "4- Substracting \n"
+                + "5 - Exit");
+//        switch for the options
+        switch (Integer.parseInt(option)) {
             
-            System.out.println("Enter the coefficient of 3 variables  \n in the format show: \n ax + by+ cz = d");
-  
-    int [][] matrix = new int [3] [3];
-    int [][] constant = new int [3][1];
-    
-    for (int i=0; i<3; i++){
-        for (int j =0; j<3; j++){
-    matrix [i][j] = userInput.nextInt();
-    
-    
-    
-    
-            
+//          multiplication 
+            case 1:
+//
+//                row2nd1_2 = Integer.parseInt(JOptionPane.showInputDialog(null, "What is the number of rows for the Matrices 1 and 2?"));
+//                column2nd1_2 = Integer.parseInt(JOptionPane.showInputDialog(null, "What is the number of columns for the Matrices 1 and 2?"));
+//
+//                int[][] matrix1B = new int[row2nd1_2][column2nd1_2];
+//                int[][] matrix2B = new int[row2nd1_2][column2nd1_2];
+//                int[][] multiplication = new int[row2nd1_2][column2nd1_2];
+//
+//                for (x = 0; x < row2nd1_2; x++) {
+//                    for (k = 0; k < column2nd1_2; k++) {
+//                        matrix1B[x][k] = Integer.parseInt(JOptionPane.showInputDialog(null, "Type a value for the Matrix 1"));
+//                        answer = answer + matrix1B[x][k] + "-";
+//                    }
+//                }
+//
+//                for (x = 0; x < row2nd1_2; x++) {
+//                    for (k = 0; k < column2nd1_2; k++) {
+//                        matrix2B[x][k] = Integer.parseInt(JOptionPane.showInputDialog(null, "Type a value for the Matrix 2"));
+//                        answer2nd = answer2nd + matrix2B[x][k] + "-";
+//                    }
+//                }
+//
+//                for (x = 0; x < row2nd1_2; x++) {
+//                    for (k = 0; k < column2nd1_2; k++) {
+//                        multiplication[x][k] = matrix1B[x][k] - matrix1B[x][k];
+//                        answer3rd = answer3rd + multiplication[x][k] + "-";
+//                    }
+//                }
+//
+//                break;
+
+//                dividing 
+            case 2:    
+
+                
+//                adding
+            case 3:
+                row1_2 = Integer.parseInt(JOptionPane.showInputDialog(null, "What is the number of rows for the Matrices 1 and 2?"));
+                column1_2 = Integer.parseInt(JOptionPane.showInputDialog(null, "What is the number of columns for the Matrices 1 and 2?"));
+
+                int[][] matrix_1 = new int[row1_2][column1_2];
+                int[][] matrix_2 = new int[row1_2][column1_2];
+                int[][] adding = new int[row1_2][column1_2];
+
+                for (x = 0; x < row1_2; x++) {
+                    for (k = 0; k < column1_2; k++) {
+                        matrix_1[x][k] = Integer.parseInt(JOptionPane.showInputDialog(null, "Type a value for the Matrix 1"));
+                        answer = answer + matrix_1[x][k] + "-";
+                    }
+                }
+
+                for (x = 0; x < row1_2; x++) {
+                    for (k = 0; k < column1_2; k++) {
+                        matrix_2[x][k] = Integer.parseInt(JOptionPane.showInputDialog(null, "Type a value for the Matrix 2"));
+                        answer2nd = answer2nd + matrix_2[x][k] + "-";
+                    }
+                }
+
+                for (x = 0; x < row1_2; x++) {
+                    for (k = 0; k < column1_2; k++) {
+                        adding[x][k] = matrix_1[x][k] + matrix_2[x][k];
+                        answer3rd = answer3rd + adding[x][k] + "-";
+                    }
+                }
+
+                break;
+
+//                subtracting 
+            case 4:
+
+                row2nd1_2 = Integer.parseInt(JOptionPane.showInputDialog(null, "What is the number of rows for the Matrices 1 and 2?"));
+                column2nd1_2 = Integer.parseInt(JOptionPane.showInputDialog(null, "What is the number of columns for the Matrices 1 and 2?"));
+
+                int[][] matrix1_2 = new int[row2nd1_2][column2nd1_2];
+                int[][] matrix2_2 = new int[row2nd1_2][column2nd1_2];
+                int[][] substraction = new int[row2nd1_2][column2nd1_2];
+
+                for (x = 0; x < row2nd1_2; x++) {
+                    for (k = 0; k < column2nd1_2; k++) {
+                        matrix1_2[x][k] = Integer.parseInt(JOptionPane.showInputDialog(null, "Type a value for the Matrix 1"));
+                        answer = answer + matrix1_2[x][k] + "-";
+                    }
+                }
+
+                for (x = 0; x < row2nd1_2; x++) {
+                    for (k = 0; k < column2nd1_2; k++) {
+                        matrix2_2[x][k] = Integer.parseInt(JOptionPane.showInputDialog(null, "Type a value for the Matrix 2"));
+                        answer2nd = answer2nd + matrix2_2[x][k] + "-";
+                    }
+                }
+
+                for (x = 0; x < row2nd1_2; x++) {
+                    for (k = 0; k < column2nd1_2; k++) {
+                        substraction[x][k] = matrix1_2[x][k] - matrix2_2[x][k];
+                        answer3rd = answer3rd + substraction[x][k] + "-";
+                    }
+                }
+
+                break;
+
+//                exit the program 
+            case 5:
+            return;
         }
-        
-        constant [i][0] =userInput.nextInt();
-        
-            }
-     System.out.println(
-            "Matrix representation of above linear equations is: ");
- 
-        // Outer loop for iterating rows
-        for (int i = 0; i < 3; i++) {
- 
-            // Inner loop for iterating columns
-            for (int j = 0; j < 3; j++) {
- 
-                System.out.print(" " + matrix[i][j]);
-            }
- 
-            System.out.print("  " + variable[i]);
-            System.out.print("  =  " + constant[i][0]);
-            System.out.println();
-        }
- 
-       
-    
-}
-    
-    
-   
-    
+
+        JOptionPane.showMessageDialog(null, "The Final Matrix is: \n" + answer + "\n" + answer2nd + "\n" + answer3rd);
     }
-
-
+}
