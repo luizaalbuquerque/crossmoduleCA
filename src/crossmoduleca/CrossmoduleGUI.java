@@ -16,6 +16,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import crossmoduleca.MySQLConection;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,9 +29,34 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
       PreparedStatement pst = null;
       ResultSet rs= null;
       
+       public void login(){
+          String query = "SELECT * FROM USERS WHERE username = '" + username + "' AND pswd = '" + pswd + "'";
+          try {
+              // this part is gonna check what was typed on the text field
+              pst = dbconn.prepareStatement(query);
+              pst.setString(1, txtUser.getText());
+              pst.setString(2, txtPassword.getText());
+               pst.setString(3, txtLoginSign.getText());
+                pst.setString(4, txtPasswordLogin.getText());
+              // the line under execute the query
+              rs = pst.executeQuery();
+              // Now gonna use If to ensure that user and password exist
+              if (rs.next()){
+                  
+                  // if the 
+                  Mainscreen Mainscreen = new Mainscreen();
+                  Mainscreen.setVisible(true);
+              }else{
+                  JOptionPane.showMessageDialog(null,"user invalid");
+              }
+              
+          } catch (Exception e) {
+              JOptionPane.showMessageDialog(null, e);
+          }
+          }
+          
       
-      
- public CrossmoduleGUI(){
+        public CrossmoduleGUI(){
         initComponents();
         dbconn = MySQLConection.dbconn();
         System.out.println(dbconn);
@@ -58,11 +84,11 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         loginBtn = new javax.swing.JButton();
-        signupBtn = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        btnLogin = new javax.swing.JButton();
+        txtLoginSign = new javax.swing.JTextField();
+        txtPasswordLogin = new javax.swing.JTextField();
+        txtUser = new javax.swing.JTextField();
+        txtPassword = new javax.swing.JTextField();
         lblStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -86,10 +112,10 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
             }
         });
 
-        signupBtn.setText("SIGN UP");
-        signupBtn.addActionListener(new java.awt.event.ActionListener() {
+        btnLogin.setText("SIGN UP");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signupBtnActionPerformed(evt);
+                btnLoginActionPerformed(evt);
             }
         });
 
@@ -103,7 +129,7 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(loginBtn)
-                    .addComponent(signupBtn))
+                    .addComponent(btnLogin))
                 .addGap(33, 33, 33))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,10 +147,10 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
                                 .addComponent(jLabel6)))
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
+                            .addComponent(txtLoginSign)
+                            .addComponent(txtPasswordLogin)
+                            .addComponent(txtUser)
+                            .addComponent(txtPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(158, 158, 158)
                         .addComponent(jLabel2)))
@@ -138,24 +164,24 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
                 .addComponent(loginBtn)
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtLoginSign, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(signupBtn)
+                .addComponent(btnLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPasswordLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(31, 31, 31)
                 .addComponent(lblStatus)
@@ -180,8 +206,6 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 //connecting DB
 
    
-        ResultSet allUsers = null;
-       
            // create a connection
            
           
@@ -189,34 +213,33 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
     }
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
         
+       login();
         
         
-        
-        
-        
-        
+              
     }//GEN-LAST:event_loginBtnActionPerformed
-
-    private void signupBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupBtnActionPerformed
+/*
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
-        
-      try{
-          
- //execute the query 
- //        checking username and password
-        String query = "SELECT * FROM USERS WHERE username = '" + username + "' AND pswd = '" + pswd + "'";
+        // call the method
+        login();
 
-  Statement stmt = null;
-      ResultSet rs = null;
-              Connection dbconn;
-                      dbconn = new MySQLConection().dbconn();
-       stmt = dbconn.createStatement();
- rs = stmt.executeQuery(query);
+        try {
 
+            //execute the query 
+            //        checking username and password
+            String query = "SELECT * FROM USERS WHERE username = '" + username + "' AND pswd = '" + pswd + "'";
+
+            Statement stmt = null;
+            ResultSet rs = null;
+            Connection dbconn;
+            dbconn = new MySQLConection().dbconn();
+            stmt = dbconn.createStatement();
+            rs = stmt.executeQuery(query);
 
             if (!rs.next()) {
                 System.out.println("The user don't exits, to create a new account, fill in the following: ");
-                
+
                 Scanner scannerUser = new Scanner(System.in); //using scanner to store the user input
 
                 System.out.print("Username: "); //check username
@@ -246,21 +269,20 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
                 System.out.print("Phone: "); //check phone
 
                 String phone = scannerUser.nextLine().toLowerCase(); //store phone
-                
+
 //                    creting the signup
-SingUp signup = new SingUp();
-signup.NewAccountWith(userfullname, user, pwd, usertype, gender, useractive, phone);
+                SingUp signup = new SingUp();
+                signup.NewAccountWith(userfullname, user, pwd, usertype, gender, useractive, phone);
 
             }
         } catch (SQLException ex) {
             Logger.getLogger(CrossmoduleGUI.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        
-        
-       
-        
-    }//GEN-LAST:event_signupBtnActionPerformed
+        }
 
+
+    }//GEN-LAST:event_btnLoginActionPerformed
+*/
+    
     /**
      * @param args the command line arguments
      */
@@ -297,18 +319,18 @@ signup.NewAccountWith(userfullname, user, pwd, usertype, gender, useractive, pho
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JButton loginBtn;
-    private javax.swing.JButton signupBtn;
+    private javax.swing.JTextField txtLoginSign;
+    private javax.swing.JTextField txtPassword;
+    private javax.swing.JTextField txtPasswordLogin;
+    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }
