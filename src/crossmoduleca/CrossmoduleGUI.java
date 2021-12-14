@@ -15,6 +15,7 @@ import java.sql.*;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import crossmoduleca.MySQLConection;
 
 /**
  *
@@ -23,6 +24,24 @@ import java.util.logging.Logger;
  */
 public class CrossmoduleGUI extends javax.swing.JFrame {
     
+      Connection dbconn = null;
+      PreparedStatement pst = null;
+      ResultSet rs= null;
+      
+      
+      
+ public CrossmoduleGUI(){
+        initComponents();
+        dbconn = MySQLConection.dbconn();
+        System.out.println(dbconn);
+        
+        if (dbconn != null ){
+            lblStatus.setText("Connected");
+        }else{
+            lblStatus.setText("Not Connected");
+        }
+          
+      }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,6 +63,7 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
+        lblStatus = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,6 +93,8 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
             }
         });
 
+        lblStatus.setText("Status");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,7 +116,9 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblStatus)
+                                .addComponent(jLabel6)))
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jTextField1)
@@ -133,7 +157,9 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
-                .addGap(62, 62, 62))
+                .addGap(31, 31, 31)
+                .addComponent(lblStatus)
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -182,9 +208,9 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 
   Statement stmt = null;
       ResultSet rs = null;
-              Connection conn;
-                      conn = new MySQLConection().dbconn();
-       stmt = conn.createStatement();
+              Connection dbconn;
+                      dbconn = new MySQLConection().dbconn();
+       stmt = dbconn.createStatement();
  rs = stmt.executeQuery(query);
 
 
@@ -281,6 +307,7 @@ signup.NewAccountWith(userfullname, user, pwd, usertype, gender, useractive, pho
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel lblStatus;
     private javax.swing.JButton loginBtn;
     private javax.swing.JButton signupBtn;
     // End of variables declaration//GEN-END:variables
