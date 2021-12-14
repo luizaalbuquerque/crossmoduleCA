@@ -1,13 +1,33 @@
 package crossmoduleca;
 
 import java.sql.SQLException;
-import java.util.Scanner;
 import javax.swing.*;
+import java.sql.*;
 
 public class LinearEquations {
 
     public static void main(String[] args) throws SQLException {
 
+//           Connection conn;
+        
+// 
+//String query = "SELECT * FROM USERS WHERE username = '" ;
+//        
+//          conn = new MySQLConection().dbconn();
+//        ResultSet rs = null;
+//        ResultSet allUsers = null;
+//        Statement stmt = null;
+//        
+//   
+//            // create a connection
+//            stmt = conn.createStatement();
+//
+//            //execute the query 
+//            rs = stmt.executeQuery(query);
+//
+//                           allUsers = stmt.executeQuery("SELECT * FROM USERS"); 
+//            
+        
         char[] var = {'x', 'y', 'z', 'w'};
         String option;
        option = JOptionPane.showInputDialog("Enter the number of variables in the equations: "); //columns
@@ -154,3 +174,4 @@ int number =Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the coeffic
         }
     }
 }
+        
