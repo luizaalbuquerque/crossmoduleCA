@@ -16,6 +16,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import crossmoduleca.MySQLConection;
+import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -218,7 +219,7 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
         
               
     }//GEN-LAST:event_loginBtnActionPerformed
-/*
+
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         // TODO add your handling code here:
         // call the method
@@ -281,7 +282,7 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnLoginActionPerformed
-*/
+
     
     /**
      * @param args the command line arguments

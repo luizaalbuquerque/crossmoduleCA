@@ -3,14 +3,13 @@ package crossmoduleca;
 import java.sql.SQLException;
 import javax.swing.*;
 import java.sql.*;
+import java.util.Scanner;
 
 public class LinearEquations {
-
 
     public static void main(String[] args) throws SQLException {
 
 //           Connection conn;
-        
 // 
 //String query = "SELECT * FROM USERS WHERE username = '" ;
 //        
@@ -28,19 +27,13 @@ public class LinearEquations {
 //
 //                           allUsers = stmt.executeQuery("SELECT * FROM USERS"); 
 //            
-        
         char[] var = {'x', 'y', 'z', 'w'};
-        String option;
-       option = JOptionPane.showInputDialog("Enter the number of variables in the equations: "); //columns
-//        Scanner userinput = new Scanner(System.in);
-//        int number = userinput.nextInt();
-int number =Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the coefficients of each variable for each equations \n " //rows
+        String option = JOptionPane.showInputDialog("Enter the number of variables in the equations: "); //columns
+
+        int number = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the coefficients of each variable for each equations \n " //rows
                 + "In the following format: \n"
                 + " ax + by + cz + ... = d "));
-//        System.out.println("Enter the coefficients of each variable for each equations \n " //rows
-//                + "In the following format: \n3"
-//                + " ax + by + cz + ... = d ");
-        
+
         double[][] matrix = new double[number][number];
         double[][] constants = new double[number][1];
         //input
@@ -48,7 +41,7 @@ int number =Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the coeffic
             for (int j = 0; j < number; j++) {
                 matrix[i][j] = Integer.parseInt(JOptionPane.showInputDialog(null));
             }
-            constants[i][0] =Integer.parseInt(JOptionPane.showInputDialog(null));
+            constants[i][0] = Integer.parseInt(JOptionPane.showInputDialog(null));
         }
         //Matrix representation
         for (int i = 0; i < number; i++) {
@@ -175,6 +168,3 @@ int number =Integer.parseInt(JOptionPane.showInputDialog(null,"Enter the coeffic
         }
     }
 }
-        
-
-   
