@@ -30,15 +30,17 @@ public class LinearEquations {
 
 
         char[] var = {'x', 'y', 'z', 'w'};
-//        String option =
+       // String option =
         JOptionPane.showInputDialog("Enter the number of variables in the equations: "); //columns
 
         int number = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the coefficients of each variable for each equations \n ")); //rows
-//        int number1 = 
-        Integer.parseInt(JOptionPane.showInputDialog(null,
-                "In the following format: \n"
-                + " ax + by + cz + ... = d "));
-
+       
+        JOptionPane.showInputDialog( "In the following format: \n" + " ax + by + cz + ... = d "); //columns
+//
+//        int number1 = Integer.parseInt(JOptionPane.showInputDialog(null,
+//                "In the following format: \n"
+//                + " ax + by + cz + ... = d "));
+      
         double[][] matrix = new double[number][number];
         double[][] constants = new double[number][1];
 

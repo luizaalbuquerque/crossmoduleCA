@@ -22,53 +22,54 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author luizaalbuquerque
- * 
+ *
  */
 public class CrossmoduleGUI extends javax.swing.JFrame {
-    
-      Connection dbconn = null;
-      PreparedStatement pst = null;
-      ResultSet rs= null;
-      
-       public void login(){
-          String query = "SELECT * FROM USERS WHERE username = '" + username + "' AND pswd = '" + pswd + "'";
-          try {
-              // this part is gonna check what was typed on the text field
-              pst = dbconn.prepareStatement(query);
-              pst.setString(1, txtUser.getText());
-              pst.setString(2, txtPassword.getText());
-               pst.setString(3, txtLoginSign.getText());
-                pst.setString(4, txtPasswordLogin.getText());
-              // the line under execute the query
-              rs = pst.executeQuery();
-              // Now gonna use If to ensure that user and password exist
-              if (rs.next()){
-                  
-                  // if the 
-                  Mainscreen Mainscreen = new Mainscreen();
-                  Mainscreen.setVisible(true);
-              }else{
-                  JOptionPane.showMessageDialog(null,"user invalid");
-              }
-              
-          } catch (Exception e) {
-              JOptionPane.showMessageDialog(null, e);
-          }
-          }
-          
-      
-        public CrossmoduleGUI(){
+
+    Connection dbconn = null;
+    PreparedStatement pst = null;
+    ResultSet rs = null;
+
+    public void login() {
+        String query = "SELECT * FROM USERS WHERE username = '" + username + "' AND pswd = '" + pswd + "'";
+        try {
+            // this part is gonna check what was typed on the text field
+            pst = dbconn.prepareStatement(query);
+            pst.setString(1, txtUser.getText());
+            pst.setString(2, txtPassword.getText());
+            pst.setString(3, txtLoginSign.getText());
+            pst.setString(4, txtPasswordLogin.getText());
+            // the line under execute the query
+            rs = pst.executeQuery();
+            // Now gonna use If to ensure that user and password exist
+            if (rs.next()) {
+
+                // if the 
+                Mainscreen Mainscreen = new Mainscreen();
+                Mainscreen.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "user invalid");
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+
+    public CrossmoduleGUI() {
         initComponents();
         dbconn = MySQLConection.dbconn();
         System.out.println(dbconn);
-        
-        if (dbconn != null ){
+
+//        check if the db is connected or not
+        if (dbconn != null) {
             lblStatus.setText("Connected");
-        }else{
+        } else {
             lblStatus.setText("Not Connected");
         }
-          
-      }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -191,9 +192,8 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-      
-    
-   //    variables
+
+    //    variables
     public static String pswdinput;
     public static String username;
     public static String userAdmin;
@@ -202,22 +202,13 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 
         pswdinput = pswd;
 
-
-
 //connecting DB
-
-   
-           // create a connection
-           
-          
-            
+        // create a connection
     }
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        
-       login();
-        
-        
-              
+
+        login();
+
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
@@ -225,65 +216,63 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
         // call the method
         login();
 
-        try {
-
-            //execute the query 
-            //        checking username and password
-            String query = "SELECT * FROM USERS WHERE username = '" + username + "' AND pswd = '" + pswd + "'";
-
-            Statement stmt = null;
-            ResultSet rs = null;
-            Connection dbconn;
-            dbconn = new MySQLConection().dbconn();
-            stmt = dbconn.createStatement();
-            rs = stmt.executeQuery(query);
-
-            if (!rs.next()) {
-                System.out.println("The user don't exits, to create a new account, fill in the following: ");
-
-                Scanner scannerUser = new Scanner(System.in); //using scanner to store the user input
-
-                System.out.print("Username: "); //check username
-
-                String user = scannerUser.nextLine().toLowerCase(); // store username
-
-                System.out.print("Password: "); //check password
-
-                String pwd = scannerUser.nextLine().toLowerCase(); //store password
-
-                System.out.print("(use a single letter) Gender: "); //check gender
-
-                String gender = scannerUser.nextLine().toLowerCase(); //store gender
-
-                System.out.print("(admin or regular) Usertype:"); //check usertype
-
-                String usertype = scannerUser.nextLine().toLowerCase(); //store user type
-
-                System.out.print("Fullname: "); //check fullname
-
-                String userfullname = scannerUser.nextLine().toLowerCase(); //store full name
-
-                System.out.print("use 1 for active and 0 for unactive: "); //check activity
-
-                String useractive = scannerUser.nextLine().toLowerCase(); //store activity
-
-                System.out.print("Phone: "); //check phone
-
-                String phone = scannerUser.nextLine().toLowerCase(); //store phone
-
-//                    creting the signup
-                SingUp signup = new SingUp();
-                signup.NewAccountWith(userfullname, user, pwd, usertype, gender, useractive, phone);
-
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(CrossmoduleGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+//        try {
+//
+//            //execute the query 
+//            //        checking username and password
+//            String query = "SELECT * FROM USERS WHERE username = '" + username + "' AND pswd = '" + pswd + "'";
+//
+//            Statement stmt = null;
+//            ResultSet rs = null;
+//            Connection dbconn;
+//            dbconn = new MySQLConection().dbconn();
+//            stmt = dbconn.createStatement();
+//            rs = stmt.executeQuery(query);
+//
+//            if (!rs.next()) {
+//                System.out.println("The user don't exits, to create a new account, fill in the following: ");
+//
+//                Scanner scannerUser = new Scanner(System.in); //using scanner to store the user input
+//
+//                System.out.print("Username: "); //check username
+//
+//                String user = scannerUser.nextLine().toLowerCase(); // store username
+//
+//                System.out.print("Password: "); //check password
+//
+//                String pwd = scannerUser.nextLine().toLowerCase(); //store password
+//
+//                System.out.print("(use a single letter) Gender: "); //check gender
+//
+//                String gender = scannerUser.nextLine().toLowerCase(); //store gender
+//
+//                System.out.print("(admin or regular) Usertype:"); //check usertype
+//
+//                String usertype = scannerUser.nextLine().toLowerCase(); //store user type
+//
+//                System.out.print("Fullname: "); //check fullname
+//
+//                String userfullname = scannerUser.nextLine().toLowerCase(); //store full name
+//
+//                System.out.print("use 1 for active and 0 for unactive: "); //check activity
+//
+//                String useractive = scannerUser.nextLine().toLowerCase(); //store activity
+//
+//                System.out.print("Phone: "); //check phone
+//
+//                String phone = scannerUser.nextLine().toLowerCase(); //store phone
+//
+////                    creting the signup
+//                SingUp signup = new SingUp();
+//                signup.NewAccountWith(userfullname, user, pwd, usertype, gender, useractive, phone);
+//
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(CrossmoduleGUI.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
     }//GEN-LAST:event_btnLoginActionPerformed
 
-    
     /**
      * @param args the command line arguments
      */

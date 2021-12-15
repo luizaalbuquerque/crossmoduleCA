@@ -73,9 +73,7 @@ public class Login {
                 SingUp signup = new SingUp();
                 signup.NewAccountWith(userfullname, user, pwd, usertype, gender, useractive, phone);
 
-            } 
-//            if the user exist, will do the following:
-            
+            } //            if the user exist, will do the following:
             else {
 
 //                assigning variables fullname and id 
