@@ -27,18 +27,21 @@ public class LinearEquations {
 //
 //                           allUsers = stmt.executeQuery("SELECT * FROM USERS"); 
 //            
+
+
         char[] var = {'x', 'y', 'z', 'w'};
 //        String option =
-                JOptionPane.showInputDialog("Enter the number of variables in the equations: "); //columns
+        JOptionPane.showInputDialog("Enter the number of variables in the equations: "); //columns
 
         int number = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the coefficients of each variable for each equations \n ")); //rows
 //        int number1 = 
-                Integer.parseInt(JOptionPane.showInputDialog(null, 
-             "In the following format: \n" +
-                 " ax + by + cz + ... = d "));
+        Integer.parseInt(JOptionPane.showInputDialog(null,
+                "In the following format: \n"
+                + " ax + by + cz + ... = d "));
 
         double[][] matrix = new double[number][number];
         double[][] constants = new double[number][1];
+
         //input
         for (int i = 0; i < number; i++) {
             for (int j = 0; j < number; j++) {
