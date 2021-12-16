@@ -5,21 +5,12 @@
  */
 package crossmoduleca;
 
-import static crossmoduleca.Login.pswdinput;
-import static crossmoduleca.MySQLConection.dbconn;
-import java.awt.List;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.*;
 import java.util.ArrayList;
 import crossmoduleca.userModel;
-import javax.swing.JScrollPane;
-import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -69,10 +60,7 @@ public class loginGUI extends javax.swing.JFrame {
                 String gender = allUsers.getString("gender");
                 Boolean useractive = allUsers.getBoolean("active");
                 String phone = allUsers.getString("phone");
-                // System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
-                // System.out.println(id + "|" + "\t" + "|" + userFullName + "|" + "\t\t" + "|" + showusername + "|" + "\t\t" + "|" + gender + "|" + " \t\t\t" + "|" + pwd + "|" + "\t" + "|" + useractive + "|" + "\t\t" + "|" + usertype + "|" + "\t" + "|" + phone + "|" + "\n\n");
 
-                //usersTable.setValueAt(phone, ERROR, NORMAL);
                 userModel userModel = new userModel();
                 userModel.id = id;
                 userModel.fullname = userFullName;
