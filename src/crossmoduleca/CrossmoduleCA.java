@@ -2,7 +2,7 @@ package crossmoduleca;
 
 import java.sql.SQLException;
 import java.util.Scanner;
-import crossmoduleca.usersdata;
+import crossmoduleca.userModel;
 
 /**
  *
@@ -27,12 +27,12 @@ public class CrossmoduleCA {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Username: "); //check username 
-        usersdata.setUsername(scanner.next().toLowerCase());
+        userModel.setUsername(scanner.next().toLowerCase());
 
         System.out.print("Password: "); //check password
-        usersdata.setPswd(scanner.next());
+        userModel.setPswd(scanner.next());
 
-        Login.loginCheck(usersdata.getUsername(), usersdata.getPswd());
+        Login.loginCheck(userModel.getUsername(), userModel.getPswd());
 
     }
 

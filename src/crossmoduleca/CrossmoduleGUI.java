@@ -6,7 +6,7 @@
 package crossmoduleca;
 
 import static crossmoduleca.Login.pswdinput;
-import static crossmoduleca.usersdata.pswd;
+//import static crossmoduleca.userModel.pswd;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import crossmoduleca.MySQLConection;
 import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
+import javax.swing.JFrame;
 
 /**
  *
@@ -31,12 +32,13 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
     ResultSet rs = null;
 
     public void login() {
-        String query = "SELECT * FROM USERS WHERE username = '" + username + "' AND pswd = '" + pswd + "'";
+        String query = "SELECT * FROM USERS WHERE username = '" + txtUser.getText() + "' AND pswd = '" + txtPassword.getText() + "'";
+
         try {
             // this part is gonna check what was typed on the text field
             pst = dbconn.prepareStatement(query);
-            pst.setString(1, txtUser.getText());
-            pst.setString(2, txtPassword.getText());
+//            pst.setString(1, txtUser.getText());
+//            pst.setString(2, txtPassword.getText());
 
             // the line under execute the query
             rs = pst.executeQuery();
@@ -44,8 +46,23 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
             if (rs.next()) {
 
                 // if the 
-                Mainscreen Mainscreen = new Mainscreen();
-                Mainscreen.setVisible(true);
+//                Mainscreen Mainscreen = new Mainscreen();
+//                Mainscreen.setVisible(true);
+                userModel user = new userModel();
+                user.usertype = rs.getString("usertype");
+
+                if (user.usertype.equals("admin")) {
+
+                    //Admin
+                    JFrame loginGUI = new loginGUI();
+
+                    loginGUI.setVisible(true);
+
+                } else {
+
+                    //No Admin
+                }
+
             } else {
                 JOptionPane.showMessageDialog(null, "user invalid");
             }
@@ -78,6 +95,9 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         loginBtn = new javax.swing.JButton();
@@ -87,6 +107,39 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
         lblStatus = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +158,12 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
+            }
+        });
+
+        txtUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUserActionPerformed(evt);
             }
         });
 
@@ -236,7 +295,7 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 //                String gender = scannerUser.nextLine().toLowerCase(); //store gender
 //
 //                System.out.print("(admin or regular) Usertype:"); //check usertype
-//
+//                                                    
 //                String usertype = scannerUser.nextLine().toLowerCase(); //store user type
 //
 //                System.out.print("Fullname: "); //check fullname
@@ -261,6 +320,10 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 //        }
 
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -303,6 +366,9 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JButton loginBtn;
     private javax.swing.JTextField txtPassword;

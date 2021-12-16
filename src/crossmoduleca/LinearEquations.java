@@ -31,7 +31,7 @@ public class LinearEquations {
 
         char[] var = {'x', 'y', 'z', 'w'};
        // String option =
-        JOptionPane.showInputDialog("Enter the number of variables in the equations: "); //columns
+  JOptionPane.showInputDialog("Enter the number of variables in the equations: "); //columns
 
         int number = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter the coefficients of each variable for each equations \n ")); //rows
        
