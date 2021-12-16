@@ -10,7 +10,7 @@ package crossmoduleca;
  * @author luizaalbuquerque
  */
 public class signupGUI extends javax.swing.JFrame {
-
+    static public String userName;
     /**
      * Creates new form signupGUI
      */

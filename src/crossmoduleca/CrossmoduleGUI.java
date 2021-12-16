@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.*;
 import crossmoduleca.MySQLConection;
 import java.awt.event.ActionEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 
@@ -41,7 +43,7 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 //if the user exists 
             if (rs.next()) {
 
-//creates and directs to a new tab if the usertype is admin 
+//get usertype and instantiate creates and directs to a new tab if the usertype is admin 
                 userModel user = new userModel();
                 user.usertype = rs.getString("usertype");
 
@@ -52,11 +54,6 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 
 //if user type is admin then display the new tab 
                     loginGUI.setVisible(true);
-
-// if it is another kind of user it will go under 'else' 
-                } else {
-
-                    //No Admin
                 }
 //error message 
             } else {
@@ -92,7 +89,7 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         loginBtn = new javax.swing.JButton();
-        btnLogin = new javax.swing.JButton();
+        signupButton = new javax.swing.JButton();
         txtUser = new javax.swing.JTextField();
         txtPassword = new javax.swing.JTextField();
         lblStatus = new javax.swing.JLabel();
@@ -145,10 +142,10 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
             }
         });
 
-        btnLogin.setText("SIGN UP");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+        signupButton.setText("SIGN UP");
+        signupButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
+                signupButtonActionPerformed(evt);
             }
         });
 
@@ -190,7 +187,7 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(lblStatus)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnLogin))))
+                                .addComponent(signupButton))))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(124, 124, 124)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -221,7 +218,7 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnLogin)
+                        .addComponent(signupButton)
                         .addGap(20, 20, 20))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -246,13 +243,30 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_loginBtnActionPerformed
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    private void signupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupButtonActionPerformed
 
+// if it is another kind of user it will go under 'else' (no Admin)
+        userModel user = new userModel();
+        try {
+            user.usertype = rs.getString("usertype");
+        } catch (SQLException ex) {
+            Logger.getLogger(CrossmoduleGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+//checking if usertype is admin 
+        if (user.usertype!=("admin")) {
+            
+            signupGUI.userName = user.fullname;
+            JFrame signupGUI = new signupGUI();
+
+// this will display the new tab 
+            signupGUI.setVisible(true);
+        }
 // call method
         login();
 
 
-    }//GEN-LAST:event_btnLoginActionPerformed
+    }//GEN-LAST:event_signupButtonActionPerformed
 
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
         // TODO add your handling code here:
@@ -294,7 +308,6 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -304,6 +317,7 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JLabel lblStatus;
     private javax.swing.JButton loginBtn;
+    private javax.swing.JButton signupButton;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
