@@ -52,6 +52,8 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
                 user.usertype = rs.getString("usertype");
 
                 if (user.usertype.equals("admin")) {
+                    
+                    loginGUI.userName = user.fullname;
 
                     //Admin
                     JFrame loginGUI = new loginGUI();

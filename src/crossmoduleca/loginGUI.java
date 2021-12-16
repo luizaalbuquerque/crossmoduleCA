@@ -36,6 +36,8 @@ public class loginGUI extends javax.swing.JFrame {
     ResultSet allUsers = null;
     Statement stmt = null;
 
+    static public String userName;
+
     /**
      * Creates new form loginGUI
      */
@@ -44,7 +46,6 @@ public class loginGUI extends javax.swing.JFrame {
         initComponents();
 
         try {
-            System.out.println(this.user);
 
             stmt = conn.createStatement();
             allUsers = stmt.executeQuery("SELECT * FROM USERS");
@@ -52,56 +53,50 @@ public class loginGUI extends javax.swing.JFrame {
             System.out.println(allUsers);
 
             ArrayList usersData = new ArrayList();
-            
-            
-    final Object[][] rowData = {};
-    final Object[] columnNames = {"id","fullname", "username", "pswd", "usertype","gender", "active", "phone"};
 
-    DefaultTableModel listTableModel;
-    listTableModel  = new DefaultTableModel(rowData, columnNames);
+            final Object[][] rowData = {};
+            final Object[] columnNames = {"id", "fullname", "username", "pswd", "usertype", "gender", "active", "phone"};
 
-    while (allUsers.next () 
-        ) {
+            DefaultTableModel listTableModel;
+            listTableModel = new DefaultTableModel(rowData, columnNames);
+
+            while (allUsers.next()) {
                 int id = allUsers.getInt("id");
-        String userFullName = allUsers.getString("fullname");
-        String showusername = allUsers.getString("username");
-        String pwd = allUsers.getString("pswd");
-        String usertype = allUsers.getString("usertype");
-        String gender = allUsers.getString("gender");
-        Boolean useractive = allUsers.getBoolean("active");
-        String phone = allUsers.getString("phone");
-        // System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
-        // System.out.println(id + "|" + "\t" + "|" + userFullName + "|" + "\t\t" + "|" + showusername + "|" + "\t\t" + "|" + gender + "|" + " \t\t\t" + "|" + pwd + "|" + "\t" + "|" + useractive + "|" + "\t\t" + "|" + usertype + "|" + "\t" + "|" + phone + "|" + "\n\n");
+                String userFullName = allUsers.getString("fullname");
+                String showusername = allUsers.getString("username");
+                String pwd = allUsers.getString("pswd");
+                String usertype = allUsers.getString("usertype");
+                String gender = allUsers.getString("gender");
+                Boolean useractive = allUsers.getBoolean("active");
+                String phone = allUsers.getString("phone");
+                // System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------");
+                // System.out.println(id + "|" + "\t" + "|" + userFullName + "|" + "\t\t" + "|" + showusername + "|" + "\t\t" + "|" + gender + "|" + " \t\t\t" + "|" + pwd + "|" + "\t" + "|" + useractive + "|" + "\t\t" + "|" + usertype + "|" + "\t" + "|" + phone + "|" + "\n\n");
 
-        //usersTable.setValueAt(phone, ERROR, NORMAL);
-        userModel userModel = user = new userModel();
-        userModel.id = id;
-        userModel.fullname = userFullName;
-        userModel.username = showusername;
-        userModel.pswd = pwd;
-        userModel.usertype = usertype;
-        userModel.gender = gender;
-        userModel.active = useractive;
-        userModel.phone = phone;
+                //usersTable.setValueAt(phone, ERROR, NORMAL);
+                userModel userModel = new userModel();
+                userModel.id = id;
+                userModel.fullname = userFullName;
+                userModel.username = showusername;
+                userModel.pswd = pwd;
+                userModel.usertype = usertype;
+                userModel.gender = gender;
+                userModel.active = useractive;
+                userModel.phone = phone;
 
-        usersData.add(userModel);
+                usersData.add(userModel);
 
-        
-        listTableModel.addRow(new Object[]{userModel.id, userModel.fullname, userModel.username, userModel.pswd, userModel.usertype, userModel.gender, userModel.active, userModel.phone});
+                listTableModel.addRow(new Object[]{userModel.id, userModel.fullname, userModel.username, userModel.pswd, userModel.usertype, userModel.gender, userModel.active, userModel.phone});
 
-       
+            }
+            // adding it to JScrollPane
 
-    }
-    // adding it to JScrollPane
+            usersTable.setModel(listTableModel);
 
-    usersTable.setModel (listTableModel);
-    
-    usersTable.setAutoResizeMode(JTable.ALLBITS);
+            usersTable.setAutoResizeMode(JTable.ALLBITS);
 
-    System.out.println (usersData);
+            System.out.println(usersData);
 
-}
-catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Error");
 //            test purpose
             e.printStackTrace();
@@ -118,17 +113,18 @@ catch (SQLException e) {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        profileLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         usersTable = new javax.swing.JTable();
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        welcome = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Profile");
+        profileLabel.setText("Profile");
 
         jLabel2.setText("Users");
 
@@ -162,16 +158,21 @@ catch (SQLException e) {
         jScrollPane1.setViewportView(usersTable);
         usersTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        editButton.setText("Edit");
+        editButton.setText("Edit My Profile");
         editButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editButtonActionPerformed(evt);
             }
         });
 
-        deleteButton.setText("Delete");
+        deleteButton.setText("Delete Selected User");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
 
-        welcome.setText("Welcome");
+        jLabel3.setText("Type an user ID");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,17 +181,21 @@ catch (SQLException e) {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(editButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 300, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(298, 298, 298)
-                        .addComponent(deleteButton))
-                    .addComponent(welcome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(profileLabel)
+                        .addGap(257, 257, 257)
+                        .addComponent(editButton))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField1)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -198,16 +203,18 @@ catch (SQLException e) {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(editButton)
-                    .addComponent(deleteButton))
-                .addGap(27, 27, 27)
-                .addComponent(welcome)
-                .addGap(48, 48, 48)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
-                .addContainerGap())
+                    .addComponent(profileLabel)
+                    .addComponent(editButton))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(deleteButton)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         pack();
@@ -217,6 +224,10 @@ catch (SQLException e) {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_editButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,10 +269,11 @@ catch (SQLException e) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel profileLabel;
     private javax.swing.JTable usersTable;
-    private javax.swing.JLabel welcome;
     // End of variables declaration//GEN-END:variables
 }
