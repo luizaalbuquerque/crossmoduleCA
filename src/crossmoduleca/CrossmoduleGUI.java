@@ -20,43 +20,49 @@ import javax.swing.JFrame;
  *
  */
 public class CrossmoduleGUI extends javax.swing.JFrame {
+
 //connecting to the database 
     Connection dbconn = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
 
     public void login() {
-//        checking the username and password
+
+//checking the username and password
         String query = "SELECT * FROM USERS WHERE username = '" + txtUser.getText() + "' AND pswd = '" + txtPassword.getText() + "'";
 
         try {
-            // this part is gonna check and store what was typed on the text field
+// this part is gonna check and store what was typed on the text field
             pst = dbconn.prepareStatement(query);
 
-            // the line under execute the query
+// the line under execute the query
             rs = pst.executeQuery();
-//           if the user exists 
+
+//if the user exists 
             if (rs.next()) {
+
 //creates and directs to a new tab if the usertype is admin 
                 userModel user = new userModel();
                 user.usertype = rs.getString("usertype");
+
 //checking if usertype is admin 
                 if (user.usertype.equals("admin")) {
-
                     loginGUI.userName = user.fullname;
                     JFrame loginGUI = new loginGUI();
-//                    if user type is admin then display the new tab 
+
+//if user type is admin then display the new tab 
                     loginGUI.setVisible(true);
+
 // if it is another kind of user it will go under 'else' 
                 } else {
 
                     //No Admin
-                    
                 }
 //error message 
             } else {
                 JOptionPane.showMessageDialog(null, "user invalid");
             }
+
 //testing purpose, catch message 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -76,7 +82,6 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -234,17 +239,16 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 
     public static void loginCheck(String username, String pswd) throws SQLException {
 
-//        pswdinput = pswd;
     }
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-
+//call method 
         login();
 
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
-        // call the method
+// call method
         login();
 
 
