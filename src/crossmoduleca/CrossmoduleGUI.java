@@ -41,6 +41,7 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 // the line under execute the query
             rs = pst.executeQuery();
 
+//if the user exits on the database it will do this:
             if (rs.next()) {
 
 //get usertype and instantiate creates and directs to a new tab if the usertype is admin 
@@ -48,19 +49,14 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
                 user.usertype = rs.getString("usertype");
                 CrossmoduleGUI.GlobalID = rs.getInt("id");
 
-//if the user do not exit
-              
-            
+//if the user do not exits 
               if (!rs.next()) {
 
-//if (!rs.next())
-//if (user.usertype!=("admin")){
 //redirects to signup tab 
                     JFrame signupGUI = new signupGUI();
                     signupGUI.setVisible(true);
                 }
-//if the user exist
-            
+              
 //checking if usertype is admin 
                 if (user.usertype.equals("admin")) {
                     loginGUI.userName = user.fullname;
@@ -74,7 +70,6 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Register user ");
 
-//                signupGUI.setVisible(true);
             }
 
 //testing purpose, catch message 
@@ -88,7 +83,7 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
         initComponents();
         dbconn = MySQLConection.dbconn();
 
-//if the connection exit , show label 'connected', if the connection is null = do not exit, show label 'not connected 
+//if the connection exits , show label 'connected', if the connection is null = user does not exits, show label 'not connected' 
         if (dbconn != null) {
             lblStatus.setText("Connected");
         } else {
@@ -255,28 +250,20 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
     public static void loginCheck(String username, String pswd) throws SQLException {
 
     }
+//redirects to login after clicking the button 'login' 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+
 //call method 
         login();
-
     }//GEN-LAST:event_loginBtnActionPerformed
 
 //redirects to signup after clicking the button 'signup'
     private void signupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupButtonActionPerformed
         JFrame signupGUI = new signupGUI();
         signupGUI.setVisible(true);
-// if it is another kind of user it will go under 'else' (no Admin)
-//        userModel user = new userModel();
-//        try {
-//            user.usertype = rs.getString("usertype");
-//        } catch (SQLException ex) {
-//            Logger.getLogger(CrossmoduleGUI.class.getName()).log(Level.SEVERE, null, ex);
-//
-//        }
+        
 // call method
         login();
-
-
     }//GEN-LAST:event_signupButtonActionPerformed
 
     private void txtUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUserActionPerformed
