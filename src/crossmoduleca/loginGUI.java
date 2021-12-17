@@ -15,6 +15,7 @@ import static java.lang.Integer.parseInt;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,7 +32,6 @@ public class loginGUI extends javax.swing.JFrame {
     ResultSet allUsers = null;
     Statement stmt = null;
     static public String userName;
-
     int access;
 
     /**
@@ -42,7 +42,7 @@ public class loginGUI extends javax.swing.JFrame {
         initComponents();
 
         try {
-//connection and query execution 
+//database connection and query execution 
             stmt = conn.createStatement();
             allUsers = stmt.executeQuery("SELECT * FROM USERS");
 
@@ -78,20 +78,19 @@ public class loginGUI extends javax.swing.JFrame {
 
 //add the information on the GUI table, selected by column 
                 usersData.add(userModel);
-
                 listTableModel.addRow(new Object[]{userModel.id, userModel.fullname, userModel.username, userModel.pswd, userModel.usertype, userModel.gender, userModel.active, userModel.phone});
 
             }
-// setting the data on the table 
+// setting the data in the table 
             usersTable.setModel(listTableModel);
             usersTable.setAutoResizeMode(JTable.ALLBITS);
 
+//catch and error message 
         } catch (SQLException e) {
-            System.out.println("Error");
-//            test purpose
+            JOptionPane.showMessageDialog(null, "An error occured while stablishing a connection with the database and doing the login. Please, try again.");
+// test purpose
             e.printStackTrace();
         }
-
     }
 
     @SuppressWarnings("unchecked")
@@ -204,23 +203,29 @@ public class loginGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//redirects to edit after clicking the button 'edit' 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
 
         JFrame editAdm = new editAdm();
         editAdm.setVisible(true);
-        // TODO add your handling code here:
     }//GEN-LAST:event_editButtonActionPerformed
-
+//deletes the user on the database after typing the ID and clicking on the button 'delete' 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
 
         try {
+
+//store the ID on the int 'id' 
             int id = parseInt(userIdRemove.getText());
 
+//query to be executed in the database 
             String q = "DELETE FROM USERS where id = " + id;
+
+//line to execute the query 
             stmt.executeUpdate(q);
 
-// TODO add your handling code here:
+//message for the user, informing that the user chosen was deleted             
+            JOptionPane.showMessageDialog(null, "User which ID is: " + id + " was deleted from the database.");
+
         } catch (SQLException ex) {
             Logger.getLogger(loginGUI.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -5,8 +5,7 @@
  */
 package crossmoduleca;
 
-import java.awt.event.ActionEvent;
-import static java.lang.Integer.parseInt;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

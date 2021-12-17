@@ -340,13 +340,11 @@ public class linearEquationsGUI extends javax.swing.JFrame {
     private void buttonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOKActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonOKActionPerformed
-
+////redirects to edit tab after clicking the button 'edit' 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         // TODO add your handling code here:
         JFrame editAdm = new editAdm();
         editAdm.setVisible(true);
-
-
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void buttonCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCalculateActionPerformed
