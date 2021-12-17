@@ -45,7 +45,7 @@ public class signupGUI extends javax.swing.JFrame {
 
         // try {
         String query = "INSERT INTO USERS (id, fullname, username, pswd, usertype, gender, active, phone) "
-                + "VALUES (NULL,'" + userFullName + "','" + showusername + "','" + pwd + "','" +  usertype + "','" + gender + "'," +  useractive + ",'" + phone + "')";
+                + "VALUES (NULL,'" + userFullName + "','" + showusername + "','" + pwd + "','" + usertype + "','" + gender + "'," + useractive + ",'" + phone + "')";
         System.out.println(query);
         try {
             stmt = conn.createStatement();

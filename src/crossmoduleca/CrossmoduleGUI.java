@@ -29,9 +29,9 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
     Connection dbconn = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-    
-static int GlobalID;
-        
+
+    static int GlobalID;
+
     public void login() {
 
 //checking the username and password
@@ -50,7 +50,7 @@ static int GlobalID;
 //get usertype and instantiate creates and directs to a new tab if the usertype is admin 
                 userModel user = new userModel();
                 user.usertype = rs.getString("usertype");
-               CrossmoduleGUI.GlobalID = rs.getInt("id");
+                CrossmoduleGUI.GlobalID = rs.getInt("id");
 //checking if usertype is admin 
                 if (user.usertype.equals("admin")) {
                     loginGUI.userName = user.fullname;
@@ -58,22 +58,21 @@ static int GlobalID;
 
 //if user type is admin then display the new tab 
                     loginGUI.setVisible(true);
-                } else {
+                } if (!rs.next()) {
 //if (!rs.next())
 //           if (user.usertype!=("admin")){
-                   
-                   
+JFrame signupGUI = new signupGUI();
 
+                signupGUI.setVisible(true);
                 }
 
 //error message 
             } else {
                 JOptionPane.showMessageDialog(null, "user invalid");
-                
-               
-                    JFrame signupGUI = new signupGUI();
 
-                    signupGUI.setVisible(true);
+//                JFrame signupGUI = new signupGUI();
+//
+//                signupGUI.setVisible(true);
             }
 
 //testing purpose, catch message 
@@ -305,8 +304,6 @@ static int GlobalID;
             java.util.logging.Logger.getLogger(CrossmoduleGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
