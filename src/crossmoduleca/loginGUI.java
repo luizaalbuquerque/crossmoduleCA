@@ -33,6 +33,9 @@ public class loginGUI extends javax.swing.JFrame {
     Statement stmt = null;
     static public String userName;
     int access;
+    
+    
+    
 
     /**
      * Creates new form loginGUI
@@ -40,13 +43,17 @@ public class loginGUI extends javax.swing.JFrame {
     public loginGUI() {
 
         initComponents();
+        
+       
+        
+       
 
         try {
 //database connection and query execution 
             stmt = conn.createStatement();
             allUsers = stmt.executeQuery("SELECT * FROM USERS");
 
-// creating an ArrayList to store the user's data 
+// creating a two dimentional ArrayList to store the user's data 
             ArrayList usersData = new ArrayList();
 // returns attributte values for cells at row and columns 
             final Object[][] rowData = {};
@@ -94,6 +101,9 @@ public class loginGUI extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
+    
+   
+        
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -203,11 +213,12 @@ public class loginGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-//redirects to edit after clicking the button 'edit' 
+////redirects to edit after clicking the button 'edit' 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-
+         System.out.println("ID; " +  CrossmoduleGUI.GlobalID);
         JFrame editAdm = new editAdm();
         editAdm.setVisible(true);
+        
     }//GEN-LAST:event_editButtonActionPerformed
 //deletes the user on the database after typing the ID and clicking on the button 'delete' 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed

@@ -50,12 +50,7 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
                 CrossmoduleGUI.GlobalID = rs.getInt("id");
 
 //if the user do not exits 
-                if (!rs.next()) {
-
-//redirects to signup tab 
-                    JFrame signupGUI = new signupGUI();
-                    signupGUI.setVisible(true);
-                }
+               
 
 //checking if usertype is admin 
                 if (user.usertype.equals("admin")) {

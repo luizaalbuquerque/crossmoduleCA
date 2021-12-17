@@ -5,7 +5,13 @@
  */
 package crossmoduleca;
 
+import static java.lang.Integer.parseInt;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,11 +19,34 @@ import javax.swing.JFrame;
  */
 public class linearEquationsGUI extends javax.swing.JFrame {
 
+     Connection conn = new MySQLConection().dbconn();
+    ResultSet rs = null;
+    ResultSet allUsers = null;
+    Statement stmt = null;
+    userModel user;
+    
     /**
      * Creates new form linearEquationsGUI
      */
     public linearEquationsGUI() {
         initComponents();
+        
+        try {
+//database connection and query execution 
+            stmt = conn.createStatement();
+            allUsers = stmt.executeQuery("SELECT * FROM linearEquations");
+                        String query ="\"INSERT INTO linearEquations (variables, result) \"\n" +
+"                + \"VALUES (NULL,'\" + userFullName + \"','\" + showusername + \"','\" + pwd + \"','\" + usertype + \"','\" + gender + \"',\" + useractive + \",'\" + phone + \"')\";\n" +
+"";
+            stmt.executeUpdate(query);
+            
+            } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "An error occured while stablishing a connection with the database and doing the login. Please, try again.");
+// test purpose
+            e.printStackTrace();
+        }
+             int rownumbers = parseInt(rowsnumber.getText());
+             
     }
 
     /**
@@ -30,7 +59,7 @@ public class linearEquationsGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        rowsnumber = new javax.swing.JTextField();
         buttonCalculate = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -254,7 +283,7 @@ public class linearEquationsGUI extends javax.swing.JFrame {
                                 .addGap(12, 12, 12)
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(rowsnumber, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                         .addComponent(buttonOK)
                         .addGap(15, 15, 15)))
@@ -272,7 +301,7 @@ public class linearEquationsGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rowsnumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buttonOK))
                 .addGap(43, 43, 43)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -339,6 +368,7 @@ public class linearEquationsGUI extends javax.swing.JFrame {
 
     private void buttonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOKActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_buttonOKActionPerformed
 ////redirects to edit tab after clicking the button 'edit' 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
@@ -378,6 +408,7 @@ public class linearEquationsGUI extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+   
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -420,7 +451,6 @@ public class linearEquationsGUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField18;
     private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField21;
     private javax.swing.JTextField jTextField22;
@@ -430,5 +460,6 @@ public class linearEquationsGUI extends javax.swing.JFrame {
     private javax.swing.JTextField m2_1;
     private javax.swing.JTextField m2_2;
     private javax.swing.JTextField m3_3;
+    private javax.swing.JTextField rowsnumber;
     // End of variables declaration//GEN-END:variables
 }
