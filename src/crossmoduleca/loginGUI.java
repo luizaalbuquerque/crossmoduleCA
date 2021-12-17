@@ -11,6 +11,9 @@ import java.sql.SQLException;
 import java.sql.*;
 import java.util.ArrayList;
 import crossmoduleca.userModel;
+import static java.lang.Integer.parseInt;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -28,8 +31,9 @@ public class loginGUI extends javax.swing.JFrame {
     ResultSet allUsers = null;
     Statement stmt = null;
     static public String userName;
-    
+
     int access;
+
     /**
      * Creates new form loginGUI
      */
@@ -100,7 +104,7 @@ public class loginGUI extends javax.swing.JFrame {
         usersTable = new javax.swing.JTable();
         editButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        userIdRemove = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -174,7 +178,7 @@ public class loginGUI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1)
+                        .addComponent(userIdRemove)
                         .addGap(18, 18, 18)
                         .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -194,7 +198,7 @@ public class loginGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(deleteButton)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(userIdRemove, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -203,17 +207,23 @@ public class loginGUI extends javax.swing.JFrame {
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
 
-                    JFrame editAdm = new editAdm();
-                       editAdm.setVisible(true);
+        JFrame editAdm = new editAdm();
+        editAdm.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-       
-//        String q = "DELETE FROM USERS where id = " + access.next();
-//                        stmt.executeUpdate(q);
+
+        try {
+            int id = parseInt(userIdRemove.getText());
+
+            String q = "DELETE FROM USERS where id = " + id;
+            stmt.executeUpdate(q);
 
 // TODO add your handling code here:
+        } catch (SQLException ex) {
+            Logger.getLogger(loginGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
@@ -257,8 +267,8 @@ public class loginGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel profileLabel;
+    private javax.swing.JTextField userIdRemove;
     private javax.swing.JTable usersTable;
     // End of variables declaration//GEN-END:variables
 }

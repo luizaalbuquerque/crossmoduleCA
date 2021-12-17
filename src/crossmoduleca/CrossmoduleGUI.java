@@ -10,11 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.*;
 import crossmoduleca.MySQLConection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 
@@ -30,27 +25,42 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
 
+//variable
     static int GlobalID;
 
     public void login() {
 
-//checking the username and password
+//Selecting the user input, username and password and storing on a String
         String query = "SELECT * FROM USERS WHERE username = '" + txtUser.getText() + "' AND pswd = '" + txtPassword.getText() + "'";
 
         try {
+
 // this part is gonna check and store what was typed on the text field
             pst = dbconn.prepareStatement(query);
 
 // the line under execute the query
             rs = pst.executeQuery();
 
-//if the user exists 
             if (rs.next()) {
 
 //get usertype and instantiate creates and directs to a new tab if the usertype is admin 
                 userModel user = new userModel();
                 user.usertype = rs.getString("usertype");
                 CrossmoduleGUI.GlobalID = rs.getInt("id");
+
+//if the user do not exit
+              
+            
+              if (!rs.next()) {
+
+//if (!rs.next())
+//if (user.usertype!=("admin")){
+//redirects to signup tab 
+                    JFrame signupGUI = new signupGUI();
+                    signupGUI.setVisible(true);
+                }
+//if the user exist
+            
 //checking if usertype is admin 
                 if (user.usertype.equals("admin")) {
                     loginGUI.userName = user.fullname;
@@ -58,20 +68,12 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 
 //if user type is admin then display the new tab 
                     loginGUI.setVisible(true);
-                } if (!rs.next()) {
-//if (!rs.next())
-//           if (user.usertype!=("admin")){
-JFrame signupGUI = new signupGUI();
-
-                signupGUI.setVisible(true);
                 }
 
 //error message 
             } else {
-                JOptionPane.showMessageDialog(null, "user invalid");
+                JOptionPane.showMessageDialog(null, "Register user ");
 
-//                JFrame signupGUI = new signupGUI();
-//
 //                signupGUI.setVisible(true);
             }
 
@@ -86,6 +88,7 @@ JFrame signupGUI = new signupGUI();
         initComponents();
         dbconn = MySQLConection.dbconn();
 
+//if the connection exit , show label 'connected', if the connection is null = do not exit, show label 'not connected 
         if (dbconn != null) {
             lblStatus.setText("Connected");
         } else {
@@ -244,7 +247,7 @@ JFrame signupGUI = new signupGUI();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //  creating the variables
+    //  creating variables
     public static String pswdinput;
     public static String username;
     public static String userAdmin;
@@ -258,16 +261,18 @@ JFrame signupGUI = new signupGUI();
 
     }//GEN-LAST:event_loginBtnActionPerformed
 
+//redirects to signup after clicking the button 'signup'
     private void signupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupButtonActionPerformed
-
+        JFrame signupGUI = new signupGUI();
+        signupGUI.setVisible(true);
 // if it is another kind of user it will go under 'else' (no Admin)
-        userModel user = new userModel();
-        try {
-            user.usertype = rs.getString("usertype");
-        } catch (SQLException ex) {
-            Logger.getLogger(CrossmoduleGUI.class.getName()).log(Level.SEVERE, null, ex);
-
-        }
+//        userModel user = new userModel();
+//        try {
+//            user.usertype = rs.getString("usertype");
+//        } catch (SQLException ex) {
+//            Logger.getLogger(CrossmoduleGUI.class.getName()).log(Level.SEVERE, null, ex);
+//
+//        }
 // call method
         login();
 
