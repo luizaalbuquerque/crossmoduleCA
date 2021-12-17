@@ -6,10 +6,8 @@ package crossmoduleca;
  */
 public class userModel {
 
-    int id;
-
+   int id;
     String username;
-
     String fullname;
     String usertype;
     String pswd;
@@ -118,6 +116,11 @@ public class userModel {
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
 }

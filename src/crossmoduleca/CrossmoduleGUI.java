@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.sql.*;
 import crossmoduleca.MySQLConection;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -27,7 +29,9 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
     Connection dbconn = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-
+    
+static int GlobalID;
+        
     public void login() {
 
 //checking the username and password
@@ -46,7 +50,7 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 //get usertype and instantiate creates and directs to a new tab if the usertype is admin 
                 userModel user = new userModel();
                 user.usertype = rs.getString("usertype");
-
+               CrossmoduleGUI.GlobalID = rs.getInt("id");
 //checking if usertype is admin 
                 if (user.usertype.equals("admin")) {
                     loginGUI.userName = user.fullname;
@@ -54,10 +58,22 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 
 //if user type is admin then display the new tab 
                     loginGUI.setVisible(true);
+                } else {
+//if (!rs.next())
+//           if (user.usertype!=("admin")){
+                   
+                   
+
                 }
+
 //error message 
             } else {
                 JOptionPane.showMessageDialog(null, "user invalid");
+                
+               
+                    JFrame signupGUI = new signupGUI();
+
+                    signupGUI.setVisible(true);
             }
 
 //testing purpose, catch message 
@@ -251,16 +267,7 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
             user.usertype = rs.getString("usertype");
         } catch (SQLException ex) {
             Logger.getLogger(CrossmoduleGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
-//checking if usertype is admin 
-        if (user.usertype!=("admin")) {
-            
-            signupGUI.userName = user.fullname;
-            JFrame signupGUI = new signupGUI();
-
-// this will display the new tab 
-            signupGUI.setVisible(true);
         }
 // call method
         login();
@@ -298,6 +305,8 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(CrossmoduleGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

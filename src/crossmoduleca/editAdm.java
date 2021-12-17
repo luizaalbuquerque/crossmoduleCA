@@ -6,10 +6,8 @@
 package crossmoduleca;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import static java.lang.Integer.parseInt;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,9 +18,8 @@ import java.util.logging.Logger;
  *
  * @author luizaalbuquerque
  */
-public class signupGUI extends javax.swing.JFrame {
-
-    static public String userName;
+public class editAdm extends javax.swing.JFrame {
+ static public String userName;
     /**
      * Creates new form signupGUI
      */
@@ -33,40 +30,23 @@ public class signupGUI extends javax.swing.JFrame {
     Statement stmt = null;
     userModel user;
 
-    private void signupButtonActionPerformed(java.awt.event.ActionEvent evt) {
+   
 
-        String showusername = usernametextview.getText();
-        String pwd = passwordtextview.getText();
-        String gender = gendertextview.getText();
-        String usertype = usertypetextview.getText();
-        String userFullName = fullnametextview.getText();
-        int useractive = parseInt(activetextview.getText());
-        String phone = phonetextview.getText();
-
-        // try {
-        String query = "INSERT INTO USERS (id, fullname, username, pswd, usertype, gender, active, phone) "
-                + "VALUES (NULL,'" + userFullName + "','" + showusername + "','" + pwd + "','" +  usertype + "','" + gender + "'," +  useractive + ",'" + phone + "')";
-        System.out.println(query);
-        try {
-            stmt = conn.createStatement();
-            stmt.executeUpdate(query);
-//            allUsers = stmt.executeQuery(query);
-        } catch (SQLException ex) {
-            Logger.getLogger(signupGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }
-
-    public signupGUI() {
+    public editAdm() {
         initComponents();
 
-        signupButton.addActionListener(new java.awt.event.ActionListener() {
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                signupButtonActionPerformed(evt);
+                updateButtonActionPerformed(evt);
+            }
+
+            private void updateButtonActionPerformed(ActionEvent evt) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
 
     }
+        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,10 +57,13 @@ public class signupGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        phonetextview = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        usernametextview = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        gendertextview = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        activetextview = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -88,15 +71,10 @@ public class signupGUI extends javax.swing.JFrame {
         fullnametextview = new javax.swing.JTextField();
         passwordtextview = new javax.swing.JTextField();
         usertypetextview = new javax.swing.JTextField();
-        phonetextview = new javax.swing.JTextField();
-        usernametextview = new javax.swing.JTextField();
-        gendertextview = new javax.swing.JTextField();
-        activetextview = new javax.swing.JTextField();
-        signupButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        updateButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("REGISTER");
 
         jLabel2.setText("USERNAME");
 
@@ -124,7 +102,9 @@ public class signupGUI extends javax.swing.JFrame {
             }
         });
 
-        signupButton.setText("Sign Up");
+        jLabel1.setText("Update Profile");
+
+        updateButton.setText("Update");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,9 +112,6 @@ public class signupGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -166,9 +143,12 @@ public class signupGUI extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel7))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(signupButton)))
-                .addContainerGap(102, Short.MAX_VALUE))
+                        .addGap(146, 146, 146)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(149, 149, 149)
+                        .addComponent(updateButton)))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,7 +176,7 @@ public class signupGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(activetextview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(usernametextview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -205,7 +185,7 @@ public class signupGUI extends javax.swing.JFrame {
                     .addComponent(gendertextview, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(26, 26, 26)
-                .addComponent(signupButton)
+                .addComponent(updateButton)
                 .addContainerGap())
         );
 
@@ -219,7 +199,7 @@ public class signupGUI extends javax.swing.JFrame {
     private void passwordtextviewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordtextviewActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordtextviewActionPerformed
-
+    
     /**
      * @param args the command line arguments
      */
@@ -237,20 +217,20 @@ public class signupGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(signupGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(editAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(signupGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(editAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(signupGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(editAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(signupGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(editAdm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new signupGUI().setVisible(true);
+                new editAdm().setVisible(true);
             }
         });
     }
@@ -269,7 +249,7 @@ public class signupGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField passwordtextview;
     private javax.swing.JTextField phonetextview;
-    private javax.swing.JButton signupButton;
+    private javax.swing.JButton updateButton;
     private javax.swing.JTextField usernametextview;
     private javax.swing.JTextField usertypetextview;
     // End of variables declaration//GEN-END:variables

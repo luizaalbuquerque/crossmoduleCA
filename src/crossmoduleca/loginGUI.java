@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.*;
 import java.util.ArrayList;
 import crossmoduleca.userModel;
+import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,7 +28,8 @@ public class loginGUI extends javax.swing.JFrame {
     ResultSet allUsers = null;
     Statement stmt = null;
     static public String userName;
-
+    
+    int access;
     /**
      * Creates new form loginGUI
      */
@@ -201,11 +203,17 @@ public class loginGUI extends javax.swing.JFrame {
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
 
+                    JFrame editAdm = new editAdm();
+                       editAdm.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        // TODO add your handling code here:
+       
+//        String q = "DELETE FROM USERS where id = " + access.next();
+//                        stmt.executeUpdate(q);
+
+// TODO add your handling code here:
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
