@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
  *
  * @author Luiza Cavalcanti
  *
+ * GITHUB REPOSITORY: https://github.com/luizaalbuquerque/crossmoduleCA.git
  */
 public class MySQLConection {
 

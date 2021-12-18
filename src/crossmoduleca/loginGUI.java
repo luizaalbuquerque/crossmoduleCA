@@ -22,6 +22,8 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author luizaalbuquerque
+ * 
+ * GITHUB REPOSITORY: https://github.com/luizaalbuquerque/crossmoduleCA.git
  */
 public class loginGUI extends javax.swing.JFrame {
 

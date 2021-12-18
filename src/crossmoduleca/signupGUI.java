@@ -16,6 +16,8 @@ import javax.swing.JFrame;
 /**
  *
  * @author luizaalbuquerque
+ * 
+ * GITHUB REPOSITORY: https://github.com/luizaalbuquerque/crossmoduleCA.git
  */
 public class signupGUI extends javax.swing.JFrame {
 

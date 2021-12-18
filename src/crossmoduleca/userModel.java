@@ -3,6 +3,8 @@ package crossmoduleca;
 /**
  *
  * @author Luiza Cavalcanti
+ * 
+ * GITHUB REPOSITORY: https://github.com/luizaalbuquerque/crossmoduleCA.git
  */
 public class userModel {
 
