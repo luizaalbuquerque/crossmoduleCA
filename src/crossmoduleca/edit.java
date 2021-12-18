@@ -6,14 +6,26 @@
 package crossmoduleca;
 
 import static java.lang.Integer.parseInt;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author luizaalbuquerque
  */
 public class edit extends javax.swing.JFrame {
-
+Connection conn = new MySQLConection().dbconn();
+    ResultSet rs = null;
+    ResultSet allUsers = null;
+    Statement stmt;
+//    Statement stmt = null;
     /**
      * Creates new form edit
      */
@@ -25,14 +37,15 @@ public class edit extends javax.swing.JFrame {
         initComponents();
 
         //setUserData();
-    }
+    }  
     
      //connecting to the database 
    
 
 
-    private void updateUserData() {
+    private void updateUserData() throws SQLException {
 
+        
         //try {
           
             
@@ -56,11 +69,11 @@ public class edit extends javax.swing.JFrame {
             String phone = phonetext.getText();
 
             String query1 = "UPDATE USERS SET fullname = '" + userFullName + "', pswd = '" + pwd + "', gender = '" + gender + "', username = '" + showusername + "', usertype = '" + usertype + "', active = '" + useractive + "', phone = '" + phone + "' where id = " + CrossmoduleGUI.GlobalID;
-//
-            System.out.println(query1);
-
-//            stmt = conn.createStatement();
-//            rs = stmt.executeQuery(query1);
+  
+        //
+        stmt = conn.createStatement();
+    
+            rs = stmt.executeQuery(query1);
 //        } catch (SQLException ex) {
 //            Logger.getLogger(editAdm.class.getName()).log(Level.SEVERE, null, ex);
 //        }
