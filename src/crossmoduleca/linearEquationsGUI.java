@@ -293,10 +293,10 @@ public class linearEquationsGUI extends javax.swing.JFrame {
             Logger.getLogger(linearEquationsGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public static double[][] invert(double[][] lenght) {
         int number = lenght.length;
-//        creating a two dimentional arrat
+//        creating a two dimentional array
         double x[][] = new double[number][number];
         double b[][] = new double[number][number];
         int index[] = new int[number];
