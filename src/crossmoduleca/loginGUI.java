@@ -14,6 +14,7 @@ import crossmoduleca.userModel;
 import static java.lang.Integer.parseInt;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -214,7 +215,8 @@ public class loginGUI extends javax.swing.JFrame {
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
 
-        
+          JFrame edit = new edit();
+       edit.setVisible(true); 
         // TODO add your handling code here:
     }//GEN-LAST:event_editButtonActionPerformed
 
