@@ -245,7 +245,8 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
     private void btnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsignupActionPerformed
 
         // call the method
-       
+        JFrame signupGUI = new signupGUI();
+       signupGUI.setVisible(true);
 
 
     }//GEN-LAST:event_btnsignupActionPerformed
