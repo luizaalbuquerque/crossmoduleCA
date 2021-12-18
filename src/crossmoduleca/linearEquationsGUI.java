@@ -5,7 +5,6 @@
  */
 package crossmoduleca;
 
-
 import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -22,20 +21,24 @@ import javax.swing.JOptionPane;
  * @author luizaalbuquerque
  *
  * GITHUB REPOSITORY: https://github.com/luizaalbuquerque/crossmoduleCA.git
+ *
+ *
+ * referencing code: GeeksforGeeks.org
+ * referencing code: sanfoundry.com/
+ * 
  */
 public class linearEquationsGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form linearEquationsGUI
      */
-    
 // database connection 
     Connection conn = new MySQLConection().dbconn();
     ResultSet rs = null;
     ResultSet allUsers = null;
     Statement stmt = null;
     static int GlobalID;
-    
+
 //creating variables 
     double[][] finalNumberMatrix;
     String resultFinalToStore = "";
@@ -171,7 +174,6 @@ public class linearEquationsGUI extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -186,6 +188,7 @@ public class linearEquationsGUI extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void variablesTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_variablesTextActionPerformed
@@ -213,7 +216,6 @@ public class linearEquationsGUI extends javax.swing.JFrame {
 // user-friendly message to inform the user that the variable was added to the program
             JOptionPane.showMessageDialog(null, "Number of variable was add as " + equationsNumber + ". \n Now add the values for coefficients.");
 
-            
 //creating a to dimentional Array
             double[][] matrix = new double[equationsNumber][equationsNumber];
             double[][] constants = new double[equationsNumber][1];
@@ -268,7 +270,7 @@ public class linearEquationsGUI extends javax.swing.JFrame {
                 }
             }
             String resultFinal = "<html><body>";
-//       final product, the final matrix result 
+//final product, the final matrix result 
 
             for (int i = 0; i < equationsNumber; i++) {
                 resultFinal += (result[i][0] + " ");
@@ -281,7 +283,7 @@ public class linearEquationsGUI extends javax.swing.JFrame {
                     + "VALUES (" + CrossmoduleGUI.GlobalID + ",'" + Arrays.deepToString(finalNumberMatrix) + "','" + resultFinalToStore + "')";
 
 //         user-friendly message to inform the user that the data was added in the database
-           JOptionPane.showMessageDialog(null,"Data inserted on the database, press 'ok' and see result ");
+            JOptionPane.showMessageDialog(null, "Data inserted on the database, press 'ok' and see result ");
 
 //            connection to the database
             stmt = conn.createStatement();
@@ -292,37 +294,38 @@ public class linearEquationsGUI extends javax.swing.JFrame {
         }
     }
 
-    public static double[][] invert(double a[][]) {
-        int n = a.length;
-        double x[][] = new double[n][n];
-        double b[][] = new double[n][n];
-        int index[] = new int[n];
-        for (int i = 0; i < n; ++i) {
+    public static double[][] invert(double[][] lenght) {
+        int number = lenght.length;
+//        creating a two dimentional arrat
+        double x[][] = new double[number][number];
+        double b[][] = new double[number][number];
+        int index[] = new int[number];
+        for (int i = 0; i < number; ++i) {
             b[i][i] = 1;
         }
 
-        // Transform the matrix into an upper triangle
-        gaussian(a, index);
+// Transform the matrix into an upper triangle
+        gaussian(lenght, index);
 
-        // Update the matrix b[i][j] with the ratios stored
-        for (int i = 0; i < n - 1; ++i) {
-            for (int j = i + 1; j < n; ++j) {
-                for (int k = 0; k < n; ++k) {
+// Update the matrix b[i][j] with the ratios stored
+        for (int i = 0; i < number - 1; ++i) {
+            for (int j = i + 1; j < number; ++j) {
+                for (int k = 0; k < number; ++k) {
                     b[index[j]][k]
-                            -= a[index[j]][i] * b[index[i]][k];
+                            -= lenght[index[j]][i] * b[index[i]][k];
                 }
             }
         }
 
         // Perform backward substitutions
-        for (int i = 0; i < n; ++i) {
-            x[n - 1][i] = b[index[n - 1]][i] / a[index[n - 1]][n - 1];
-            for (int j = n - 2; j >= 0; --j) {
+        for (int i = 0; i < number; ++i) {
+            x[number - 1][i] = b[index[number - 1]][i] / lenght[index[number - 1]][number - 1];
+            for (int j = number - 2; j >= 0; --j) {
                 x[j][i] = b[index[j]][i];
-                for (int k = j + 1; k < n; ++k) {
-                    x[j][i] -= a[index[j]][k] * x[k][i];
+                for (int k = j + 1; k < number; ++k) {
+                    x[j][i] -= lenght[index[j]][k] * x[k][i];
                 }
-                x[j][i] /= a[index[j]][j];
+                x[j][i] /= lenght[index[j]][j];
             }
         }
         return x;
