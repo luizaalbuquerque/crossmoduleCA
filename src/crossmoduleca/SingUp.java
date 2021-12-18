@@ -24,7 +24,7 @@ public class SingUp {
     public String phone;
 
     public void NewAccountWith(String fullname, String username, String pswd, String usertype, String gender, String useractive, String phone) throws SQLException {
-
+// setting variables 
         this.fullName = fullname;
         this.userName = username;
         this.gender = gender;
@@ -36,6 +36,7 @@ public class SingUp {
 //        connecting with DB
         Connection conn;
 
+//        storing query in a variable
         String query = "INSERT INTO USERS (id, fullname, username, pswd, usertype, gender, active, phone) "
                 + "VALUES (NULL,'" + this.fullName + "','" + this.userName + "','" + this.pswd + "','" + this.usertype + "','" + this.gender + "','" + this.active + "','" + this.phone + "')";
 
@@ -53,8 +54,6 @@ public class SingUp {
 //            e.printStackTrace();
         }
         conn.close();
-
-        System.out.println("Sign up:" + query);
 
     }
 

@@ -21,6 +21,7 @@ public class MySQLConection {
         String dbpswd = "Iza051200*";
         Connection conn = null;
 
+//        connection 
         try {
 
             conn = DriverManager.getConnection(url, user, dbpswd);

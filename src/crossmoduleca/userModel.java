@@ -6,18 +6,15 @@ package crossmoduleca;
  */
 public class userModel {
 
+//    variables
     int id;
-
     String username;
-
     String fullname;
     String usertype;
     String pswd;
     String gender;
     boolean active;
     String phone;
-//    static String variables;
-//    static String result;
 
     /**
      * @return username
@@ -43,21 +40,21 @@ public class userModel {
     /**
      * @param fullname to set
      */
-    public  void setFullname(String fullname) {
+    public void setFullname(String fullname) {
         this.fullname = fullname;
     }
 
     /**
      * @return usertype
      */
-    public  String getUsertype() {
+    public String getUsertype() {
         return this.usertype;
     }
 
     /**
      * @param usertype to set
      */
-    public  void setUsertype(String usertype) {
+    public void setUsertype(String usertype) {
         this.usertype = usertype;
     }
 
@@ -71,42 +68,42 @@ public class userModel {
     /**
      * @param pswd to set
      */
-    public  void setPswd(String pswd) {
+    public void setPswd(String pswd) {
         this.pswd = pswd;
     }
 
     /**
      * @return the gender
      */
-    public  String getGender() {
+    public String getGender() {
         return this.gender;
     }
 
     /**
      * @param gender to set
      */
-    public  void setGender(String gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
     /**
      * @return the active
      */
-    public  boolean isActive() {
+    public boolean isActive() {
         return this.active;
     }
 
     /**
      * @param active to set
      */
-    public  void setActive(boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
     /**
      * @return the phone
      */
-    public  String getphone() {
+    public String getphone() {
         return this.phone;
     }
 

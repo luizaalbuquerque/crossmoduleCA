@@ -40,6 +40,10 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 //creates and directs to a new tab if the usertype is admin 
                 userModel user = new userModel();
                 user.usertype = rs.getString("usertype");
+                
+                 CrossmoduleGUI.GlobalID = rs.getInt("id");
+                
+                
 //checking if usertype is admin 
                 if (user.usertype.equals("admin")) {
 

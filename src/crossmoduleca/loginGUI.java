@@ -27,6 +27,7 @@ public class loginGUI extends javax.swing.JFrame {
 
     userModel user;
 
+//connection 
     Connection conn = new MySQLConection().dbconn();
     ResultSet rs = null;
     ResultSet allUsers = null;
@@ -43,19 +44,22 @@ public class loginGUI extends javax.swing.JFrame {
 
         try {
 
+//            selecting all table 
             stmt = conn.createStatement();
             allUsers = stmt.executeQuery("SELECT * FROM USERS");
 
-            System.out.println(allUsers);
-
+//            creating arrayList to store data
             ArrayList usersData = new ArrayList();
 
+//            two dimentional ArrayList to show the table 
             final Object[][] rowData = {};
             final Object[] columnNames = {"id", "fullname", "username", "pswd", "usertype", "gender", "active", "phone"};
 
+//            view table on user interface
             DefaultTableModel listTableModel;
             listTableModel = new DefaultTableModel(rowData, columnNames);
 
+//            loop to show all rows from the table
             while (allUsers.next()) {
                 int id = allUsers.getInt("id");
                 String userFullName = allUsers.getString("fullname");
@@ -87,8 +91,6 @@ public class loginGUI extends javax.swing.JFrame {
 
             usersTable.setAutoResizeMode(JTable.ALLBITS);
 
-            System.out.println(usersData);
-
         } catch (SQLException e) {
             System.out.println("Error");
 //            test purpose
@@ -117,7 +119,7 @@ public class loginGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        profileLabel.setText("Profile");
+        profileLabel.setText("User Type: ADMIN");
 
         jLabel2.setText("Users");
 
@@ -199,8 +201,8 @@ public class loginGUI extends javax.swing.JFrame {
                     .addComponent(profileLabel)
                     .addComponent(editButton))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -215,28 +217,32 @@ public class loginGUI extends javax.swing.JFrame {
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
 
-          JFrame edit = new edit();
-       edit.setVisible(true); 
+//        redirect to class edit, when clicking the button 'edit'
+        JFrame edit = new edit();
+        edit.setVisible(true);
         // TODO add your handling code here:
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
-        
-        
-         try {
+
+//deleting user option when clicking the button 'delete'
+        try {
+
+//storing ID in a variable after the input of the user is added on the text space      
             int id = parseInt(userIdRemove.getText());
 
+// variable to store the query that is going to be executed in the database
             String q = "DELETE FROM USERS where id = " + id;
             stmt.executeUpdate(q);
-    
 
-             JOptionPane.showMessageDialog(null, "user deleted");
+//user-friendly message for the user to confirm deletion
+            JOptionPane.showMessageDialog(null, "User deleted");
+
 // TODO add your handling code here:
         } catch (SQLException ex) {
             Logger.getLogger(loginGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-                                                
 
     }//GEN-LAST:event_deleteButtonActionPerformed
 
