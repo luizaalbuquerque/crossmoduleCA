@@ -16,11 +16,27 @@ public class linearEquationsGUI extends javax.swing.JFrame {
     /**
      * Creates new form linearEquationsGUI
      */
+    
     public linearEquationsGUI() {
         initComponents();
+        
+        try {
+//database connection and query execution 
+            stmt = conn.createStatement();
+            allUsers = stmt.executeQuery("SELECT * FROM linearEquations");
+                        String query ="\"INSERT INTO linearEquations (variables, result) \"\n" +
+"                + \"VALUES (NULL,'\" + userFullName + \"','\" + showusername + \"','\" + pwd + \"','\" + usertype + \"','\" + gender + \"',\" + useractive + \",'\" + phone + \"')\";\n" +
+"";
+            stmt.executeUpdate(query);
+            
+            } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, "An error occured while stablishing a connection with the database and doing the login. Please, try again.");
+// test purpose
+            e.printStackTrace();
+             
     }
+    }                                             
 
-              
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
