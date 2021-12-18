@@ -16,56 +16,58 @@ import javax.swing.JFrame;
 /**
  *
  * @author luizaalbuquerque
+ * 
+ * GITHUB REPOSITORY: https://github.com/luizaalbuquerque/crossmoduleCA.git
  *
  */
 public class CrossmoduleGUI extends javax.swing.JFrame {
 //connecting to the database 
+
     Connection dbconn = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     static int GlobalID;
-    
+
     public void login() {
-//        checking the username and password
+
+// getting the username and password input and creating a query, storing it in a variable 
         String query = "SELECT * FROM USERS WHERE username = '" + txtUser.getText() + "' AND pswd = '" + txtPassword.getText() + "'";
 
         try {
-            // this part is gonna check and store what was typed on the text field
+//  database connection part
             pst = dbconn.prepareStatement(query);
-
-            // the line under execute the query
             rs = pst.executeQuery();
-//           if the user exists 
+
+//           if the user exists in the database
             if (rs.next()) {
+
 //creates and directs to a new tab if the usertype is admin 
                 userModel user = new userModel();
                 user.usertype = rs.getString("usertype");
-                
-                 CrossmoduleGUI.GlobalID = rs.getInt("id");
-                
-                
+
+//               getting ID of the user 
+                CrossmoduleGUI.GlobalID = rs.getInt("id");
+
 //checking if usertype is admin 
                 if (user.usertype.equals("admin")) {
 
+//open the tab/frame 'login' 
                     loginGUI.userName = user.fullname;
                     JFrame loginGUI = new loginGUI();
-//                    if user type is admin then display the new tab 
                     loginGUI.setVisible(true);
-// if it is another kind of user it will go under 'else' 
+
+// if the user exists and it is another type of user, it will go under 'else' 
                 } else {
+                    if (!rs.next()) {
 
-               if (!rs.next()) {
+//redirects to signup tab, since the user is not admin 
+                        JOptionPane.showMessageDialog(null, "regular user, Please Log in By registring");
+                        JFrame signupGUI = new signupGUI();
+                        signupGUI.setVisible(true);
+                    }
 
-//if (!rs.next())
-//if (user.usertype!=("admin")){
-//redirects to signup tab 
-  JOptionPane.showMessageDialog(null, "regular user, Please Log in By registring");
-                    JFrame signupGUI = new signupGUI();
-                    signupGUI.setVisible(true);
                 }
-                    
-                }
-//error message 
+//message to user, to inform that the user is not on the database, therefore it gives the option to create a new user, using the 'sign up' button
             } else {
                 JOptionPane.showMessageDialog(null, "user invalid, use Sign up button to register");
             }
@@ -74,21 +76,22 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e);
         }
     }
-
 //    checking the database connection and displaying on the user interface 
+
     public CrossmoduleGUI() {
         initComponents();
-        dbconn = MySQLConection.dbconn();
 
+        dbconn = MySQLConection.dbconn();
+//if the database is connected it will show 'connected' on the status label 
         if (dbconn != null) {
             lblStatus.setText("Connected");
+//            else, the database is not connected it will display 'not connected' 
         } else {
             lblStatus.setText("Not Connected");
         }
 
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -239,27 +242,25 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //  creating the variables
+    //  creating variables
     public static String pswdinput;
     public static String username;
     public static String userAdmin;
 
     public static void loginCheck(String username, String pswd) throws SQLException {
 
-//        pswdinput = pswd;
     }
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-
+// calling method 'login'
         login();
 
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void btnsignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsignupActionPerformed
 
-        // call the method
+//        if the user clicks on the button 'signup'it will direct to the page signup
         JFrame signupGUI = new signupGUI();
-       signupGUI.setVisible(true);
-
+        signupGUI.setVisible(true);
 
     }//GEN-LAST:event_btnsignupActionPerformed
 

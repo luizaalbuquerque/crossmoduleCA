@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.sql.*;
 import java.util.Scanner;
 
+// GITHUB REPOSITORY: https://github.com/luizaalbuquerque/crossmoduleCA.git 
 public class LinearEquations {
 
     public static void main(String[] args) throws SQLException {

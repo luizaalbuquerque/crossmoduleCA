@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
 /**
  *
  * @author luizaalbuquerque
+ * 
+ * GITHUB REPOSITORY: https://github.com/luizaalbuquerque/crossmoduleCA.git
  */
 public class edit extends javax.swing.JFrame {
     
@@ -30,6 +32,11 @@ public class edit extends javax.swing.JFrame {
        /**
      * Creates new form editAdm
      */
+        Connection conn = new MySQLConection().dbconn();
+    ResultSet rs = null;
+    ResultSet allUsers = null;
+    Statement stmt = null;
+    static int GlobalID;
     public edit() {
 
         initComponents();
@@ -48,7 +55,8 @@ public class edit extends javax.swing.JFrame {
             
 //            Connection conn = new MySQLConection().dbconn();
 //            Statement stmt = null;
-////    
+
+// storing the user input into variables    
             String userFullName = fullnametext.getText();
             String pwd = passwordtext.getText();
             String gender = gendertext.getText();
@@ -57,13 +65,12 @@ public class edit extends javax.swing.JFrame {
             int useractive = parseInt(activetext.getText());
             String phone = phonetext.getText();
 
+//storing query to be executedinto a String 
             String query1 = "UPDATE USERS SET fullname = '" + userFullName + "', pswd = '" + pwd + "', gender = '" + gender + "', username = '" + showusername + "', usertype = '" + usertype + "', active = '" + useractive + "', phone = '" + phone + "' where id = " + CrossmoduleGUI.GlobalID;
             System.out.println("query: "+query1);
-            //
-           
-//             stmt = conn.createStatement();
-//             stmt.executeQuery(query1);
         
+            stmt = conn.createStatement();
+            stmt.executeUpdate(query1);
            
 //        } catch (SQLException ex) {
 //            Logger.getLogger(edit.class.getName()).log(Level.SEVERE, null, ex);
@@ -246,6 +253,7 @@ public class edit extends javax.swing.JFrame {
 
     private void modifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyButtonActionPerformed
 
+//calling method 'updateUserData'
         try {
             updateUserData();
         } catch (SQLException ex) {

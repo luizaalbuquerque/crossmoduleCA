@@ -12,21 +12,32 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author luizaalbuquerque
+ *
+ * GITHUB REPOSITORY: https://github.com/luizaalbuquerque/crossmoduleCA.git
  */
 public class linearEquationsGUI extends javax.swing.JFrame {
 
     /**
      * Creates new form linearEquationsGUI
      */
-    Connection dbconn = null;
-    PreparedStatement pst = null;
+// database connection 
+    Connection conn = new MySQLConection().dbconn();
     ResultSet rs = null;
+    ResultSet allUsers = null;
+    Statement stmt = null;
+    static int GlobalID;
+
+    double[][] finalNumberMatrix;
+    String resultFinalToStore = "";
 
     public linearEquationsGUI() {
         initComponents();
@@ -57,7 +68,6 @@ public class linearEquationsGUI extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         variablesText = new javax.swing.JTextField();
-        coefficientsText = new javax.swing.JTextField();
         okButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         editbutton = new javax.swing.JButton();
@@ -65,12 +75,10 @@ public class linearEquationsGUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        addNumberButton = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        resultLabel = new javax.swing.JLabel();
+        inverseLabel = new javax.swing.JLabel();
+        finalResult = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -79,12 +87,6 @@ public class linearEquationsGUI extends javax.swing.JFrame {
         variablesText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 variablesTextActionPerformed(evt);
-            }
-        });
-
-        coefficientsText.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                coefficientsTextActionPerformed(evt);
             }
         });
 
@@ -112,75 +114,55 @@ public class linearEquationsGUI extends javax.swing.JFrame {
 
         jLabel6.setText("Representation:");
 
-        addNumberButton.setText("add Number");
-        addNumberButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addNumberButtonActionPerformed(evt);
-            }
-        });
+        resultLabel.setText("Representation Label");
 
-        jLabel8.setText("Example: ax + by + cz + ew = d");
+        inverseLabel.setText("Inverse Label");
 
-        jLabel9.setText("4 and press 'add Number'");
-
-        jLabel10.setText("-2 and press 'add Number'");
-
-        jLabel13.setText("Enter the coefficients for the variables of each equation");
+        finalResult.setText("Result Label");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(121, 121, 121)
-                                .addComponent(jLabel6)
-                                .addGap(67, 67, 67)
-                                .addComponent(jLabel5))
-                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(106, 106, 106)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(editbutton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(141, 141, 141)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(editbutton))
+                                .addComponent(resultLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(67, 67, 67)
+                                .addComponent(inverseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(variablesText))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(23, 23, 23)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(12, 12, 12)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel10)
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addComponent(jLabel9)
-                                                        .addGap(131, 131, 131)
-                                                        .addComponent(jLabel12))
-                                                    .addGroup(layout.createSequentialGroup()
-                                                        .addGap(287, 287, 287)
-                                                        .addComponent(coefficientsText, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                        .addComponent(addNumberButton)))))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(okButton)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(26, 26, 26)
+                                .addComponent(finalResult, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
+                                .addComponent(jLabel12))
+                            .addComponent(variablesText))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(okButton)
+                        .addGap(15, 15, 15))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(25, 25, 25)
+                        .addComponent(jLabel6)
+                        .addGap(129, 129, 129)
+                        .addComponent(jLabel5)
+                        .addGap(194, 194, 194)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(300, 300, 300)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,32 +171,30 @@ public class linearEquationsGUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editbutton)
                     .addComponent(jLabel4))
-                .addGap(37, 37, 37)
-                .addComponent(jLabel1)
-                .addGap(29, 29, 29)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(variablesText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(okButton))
-                .addGap(18, 18, 18)
+                .addGap(53, 53, 53)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(coefficientsText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addNumberButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 12, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel12))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(104, 104, 104))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel12)
+                        .addGap(183, 183, 183))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(inverseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(resultLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(finalResult, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(142, 142, 142))))
         );
 
         pack();
@@ -227,69 +207,106 @@ public class linearEquationsGUI extends javax.swing.JFrame {
 
     private void editbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editbuttonActionPerformed
         // TODO add your handling code here:
-
+//opening a new tab when clicking on the button 'Edit my Profile' 
         JFrame edit = new edit();
         edit.setVisible(true);
     }//GEN-LAST:event_editbuttonActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
 
-        char[] variablesType = {'x', 'y', 'z', 'w'};
-        int equationsNumber = parseInt(variablesText.getText());
+//   Storing the variables that are going to the the constants
+            char[] variablesType = {'x', 'y', 'z', 'w'};
 
-        JOptionPane.showMessageDialog(null, "Number of variable was add as " + equationsNumber + ". \n Now add the values for coefficients.");
+// getting the number of constantes from the user and storing in an int
+            int equationsNumber = parseInt(variablesText.getText());
+
+// user-friendly message to inform the user that the variable was added to the program
+            JOptionPane.showMessageDialog(null, "Number of variable was add as " + equationsNumber + ". \n Now add the values for coefficients.");
 //
 //        int number1 = Integer.parseInt(JOptionPane.showInputDialog(null,
 //                "In the following format: \n"
 //                + " ax + by + cz + ... = d "));
 
-        double[][] matrix = new double[equationsNumber][equationsNumber];
-        double[][] constants = new double[equationsNumber][1];
+            JOptionPane.showInputDialog("Enter the coefficientes for the variables of each equation \n the format will be: \n" + " ax + by + cz + ew... = d \n obs.: if the number is negative, add '-' before it "); //columns
 
-        //input
-    
-        for (int i = 0; i < equationsNumber; i++) {
-            for (int j = 0; j < equationsNumber; j++) {
+//creating a to dimentional Array
+            double[][] matrix = new double[equationsNumber][equationsNumber];
+            double[][] constants = new double[equationsNumber][1];
+
+//loop to display the user's input in an organized way
+            for (int i = 0; i < equationsNumber; i++) {
+                for (int j = 0; j < equationsNumber; j++) {
 //                    int conefficients = parseInt(coefficientsText.getText()):
-                matrix[i][j] = Integer.parseInt(JOptionPane.showInputDialog(null));
+                    matrix[i][j] = Integer.parseInt(JOptionPane.showInputDialog(null));
+                }
+                constants[i][0] = Integer.parseInt(JOptionPane.showInputDialog(null));
             }
-            constants[i][0] = Integer.parseInt(JOptionPane.showInputDialog(null));
-        }
-        //Matrix representation
-        for (int i = 0; i < equationsNumber; i++) {
-            for (int j = 0; j < equationsNumber; j++) {
-                System.out.print(" " + matrix[i][j]);
+
+            finalNumberMatrix = matrix;
+
+            String results = "<html><body>";
+//loop to display the user's input in an organized way (showing the Matrix representation)
+            for (int i = 0; i < equationsNumber; i++) {
+                for (int j = 0; j < equationsNumber; j++) {
+
+                    results += " " + matrix[i][j];
+                }
+
+                results += "   " + variablesType[i];
+                results += ("  =  " + constants[i][0]);
+
+                results += "<br>";
+
             }
-            System.out.print("  " + variablesType[i]);
-            System.out.print("  =  " + constants[i][0]);
-            System.out.println();
-        }
-        //inverse of matrix mat[][]
-        double inverted_matrix[][] = invert(matrix);
-        System.out.println("The inverse is: ");
-        for (int i = 0; i < equationsNumber; ++i) {
-            for (int j = 0; j < equationsNumber; ++j) {
-                System.out.print(inverted_matrix[i][j] + "  ");
+
+            resultLabel.setText("" + results);
+
+            String inverse = "<html><body>";
+//inverse of matrix[][]
+            double inverted_matrix[][] = invert(matrix);
+
+            for (int i = 0; i < equationsNumber; ++i) {
+                for (int j = 0; j < equationsNumber; ++j) {
+                    inverse += "" + inverted_matrix[i][j] + "  ";
+                    inverse += (inverted_matrix[i][j] + "  ");
+                }
+                inverse += "<br>";
             }
-            System.out.println();
-        }
-        //Multiplication of mat inverse and constants
-        double result[][] = new double[equationsNumber][1];
-        for (int i = 0; i < equationsNumber; i++) {
-            for (int j = 0; j < 1; j++) {
-                for (int k = 0; k < equationsNumber; k++) {
-                    result[i][j] = result[i][j] + inverted_matrix[i][k] * constants[k][j];
+            inverseLabel.setText("" + inverse);
+
+//Multiplication of mat inverse and constants
+            double result[][] = new double[equationsNumber][1];
+            for (int i = 0; i < equationsNumber; i++) {
+                for (int j = 0; j < 1; j++) {
+                    for (int k = 0; k < equationsNumber; k++) {
+                        result[i][j] = result[i][j] + inverted_matrix[i][k] * constants[k][j];
+                    }
                 }
             }
-        }
-//        product, final matrix 
-        System.out.println("The product is:");
-        for (int i = 0; i < equationsNumber; i++) {
-            System.out.println(result[i][0] + " ");
-        }
-//        userinput.close();
+            String resultFinal = "<html><body>";
+//        product, final matrix
 
+            for (int i = 0; i < equationsNumber; i++) {
+                resultFinal += (result[i][0] + " ");
+                resultFinalToStore += (result[i][0]);
+
+            }
+//        userinput.close();
+            finalResult.setText("" + resultFinal);
+
+            String query = "INSERT INTO linearEquations (id, variables ,result) "
+                    + "VALUES (" + CrossmoduleGUI.GlobalID + ",'" + Arrays.deepToString(finalNumberMatrix) + "','" + resultFinalToStore + "')";
+
+            System.out.println("TEST: " + query);
+
+            stmt = conn.createStatement();
+            stmt.executeUpdate(query);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(linearEquationsGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public static double[][] invert(double a[][]) {
@@ -381,16 +398,8 @@ public class linearEquationsGUI extends javax.swing.JFrame {
             }
         }
 
- 
+
     }//GEN-LAST:event_okButtonActionPerformed
-
-    private void coefficientsTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coefficientsTextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_coefficientsTextActionPerformed
-
-    private void addNumberButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNumberButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addNumberButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -428,21 +437,18 @@ public class linearEquationsGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addNumberButton;
-    private javax.swing.JTextField coefficientsText;
     private javax.swing.JButton editbutton;
+    private javax.swing.JLabel finalResult;
+    private javax.swing.JLabel inverseLabel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JButton okButton;
+    private javax.swing.JLabel resultLabel;
     private javax.swing.JTextField variablesText;
     // End of variables declaration//GEN-END:variables
 }
