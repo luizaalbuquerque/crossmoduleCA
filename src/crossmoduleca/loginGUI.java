@@ -27,15 +27,9 @@ public class loginGUI extends javax.swing.JFrame {
 
 //creating and assigning variables 
     userModel user;
-    Connection conn = new MySQLConection().dbconn();
-    ResultSet rs = null;
-    ResultSet allUsers = null;
-    Statement stmt = null;
+
     static public String userName;
     int access;
-    
-    
-    
 
     /**
      * Creates new form loginGUI
@@ -43,12 +37,14 @@ public class loginGUI extends javax.swing.JFrame {
     public loginGUI() {
 
         initComponents();
-        
-       
-        
-       
 
+//creating database connection      
         try {
+            Connection conn = new MySQLConection().dbconn();
+            ResultSet rs = null;
+            ResultSet allUsers = null;
+            Statement stmt = null;
+
 //database connection and query execution 
             stmt = conn.createStatement();
             allUsers = stmt.executeQuery("SELECT * FROM USERS");
@@ -94,16 +90,14 @@ public class loginGUI extends javax.swing.JFrame {
 
 //catch and error message 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "An error occured while stablishing a connection with the database and doing the login. Please, try again.");
-// test purpose
+//test purpose
             e.printStackTrace();
         }
     }
 
     @SuppressWarnings("unchecked")
-    
-   
-        
+
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -215,13 +209,17 @@ public class loginGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 ////redirects to edit after clicking the button 'edit' 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-         System.out.println("ID; " +  CrossmoduleGUI.GlobalID);
+
         JFrame editAdm = new editAdm();
         editAdm.setVisible(true);
-        
+
     }//GEN-LAST:event_editButtonActionPerformed
 //deletes the user on the database after typing the ID and clicking on the button 'delete' 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+
+     //connection
+            Statement stmt = null;
+
 
         try {
 
@@ -234,12 +232,14 @@ public class loginGUI extends javax.swing.JFrame {
 //line to execute the query 
             stmt.executeUpdate(q);
 
+// TODO add your handling code here:
 //message for the user, informing that the user chosen was deleted             
             JOptionPane.showMessageDialog(null, "User which ID is: " + id + " was deleted from the database.");
 
         } catch (SQLException ex) {
             Logger.getLogger(loginGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
+   
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**

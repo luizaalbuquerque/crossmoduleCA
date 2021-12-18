@@ -50,8 +50,6 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
                 CrossmoduleGUI.GlobalID = rs.getInt("id");
 
 //if the user do not exits 
-               
-
 //checking if usertype is admin 
                 if (user.usertype.equals("admin")) {
                     loginGUI.userName = user.fullname;
@@ -59,6 +57,10 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 
 //if user type is admin then display the new tab 
                     loginGUI.setVisible(true);
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "Not admin, use Button register ");
+
                 }
 
 //error message 

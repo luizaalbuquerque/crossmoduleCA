@@ -231,8 +231,6 @@ public class signupGUI extends javax.swing.JFrame {
 //redirects to linearEquations tab after clicking the button 'signup' 
     private void signupButtonconfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupButtonconfirmActionPerformed
         // TODO add your handling code here:
-        JFrame linearEquationsGUI = new linearEquationsGUI();
-        linearEquationsGUI.setVisible(true);
 
 //getting the user input and storing in a variable 
         String showusername = usernametextview.getText();
@@ -248,9 +246,15 @@ public class signupGUI extends javax.swing.JFrame {
                 + "VALUES (NULL,'" + userFullName + "','" + showusername + "','" + pwd + "','" + usertype + "','" + gender + "'," + useractive + ",'" + phone + "')";
 
         try {
+            
 //creating and executing the query 
             stmt = conn.createStatement();
             stmt.executeUpdate(query);
+
+//opening a tab for linear equations
+            JFrame linearEquationsGUI = new linearEquationsGUI();
+            linearEquationsGUI.setVisible(true);
+
         } catch (SQLException ex) {
             Logger.getLogger(signupGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -283,7 +287,7 @@ public class signupGUI extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create  and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new signupGUI().setVisible(true);
