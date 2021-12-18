@@ -23,7 +23,8 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
     Connection dbconn = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
-
+    static int GlobalID;
+    
     public void login() {
 //        checking the username and password
         String query = "SELECT * FROM USERS WHERE username = '" + txtUser.getText() + "' AND pswd = '" + txtPassword.getText() + "'";

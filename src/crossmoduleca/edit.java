@@ -6,6 +6,7 @@
 package crossmoduleca;
 
 import static java.lang.Integer.parseInt;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -240,7 +241,7 @@ public class edit extends javax.swing.JFrame {
 
     private void modifyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyButtonActionPerformed
         // TODO add your handling code here:
-        System.out.println("test");
+        JOptionPane.showMessageDialog(null, "user with ID: "+ CrossmoduleGUI.GlobalID + " was modified");
     }//GEN-LAST:event_modifyButtonActionPerformed
 
     private void usernametextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernametextActionPerformed
