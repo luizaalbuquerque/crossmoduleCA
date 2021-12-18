@@ -7,74 +7,53 @@ package crossmoduleca;
 
 import static java.lang.Integer.parseInt;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-
 
 /**
  *
  * @author luizaalbuquerque
- * 
+ *
  * GITHUB REPOSITORY: https://github.com/luizaalbuquerque/crossmoduleCA.git
  */
 public class edit extends javax.swing.JFrame {
-    
-   
-//    Statement stmt = null;
+
     /**
      * Creates new form edit
      */
-       /**
-     * Creates new form editAdm
-     */
-        Connection conn = new MySQLConection().dbconn();
+//    database connetion
+    Connection conn = new MySQLConection().dbconn();
     ResultSet rs = null;
     ResultSet allUsers = null;
     Statement stmt = null;
+//variables
     static int GlobalID;
-    public edit() {
 
+    public edit() {
         initComponents();
 
-        //setUserData();
-    }  
-    
-     //connecting to the database 
-   
-
+    }
 
     private void updateUserData() throws SQLException {
-        
-       // try {
-          
-            
-//            Connection conn = new MySQLConection().dbconn();
-//            Statement stmt = null;
 
 // storing the user input into variables    
-            String userFullName = fullnametext.getText();
-            String pwd = passwordtext.getText();
-            String gender = gendertext.getText();
-            String showusername = usernametext.getText();
-            String usertype = usertypetext.getText();
-            int useractive = parseInt(activetext.getText());
-            String phone = phonetext.getText();
+        String userFullName = fullnametext.getText();
+        String pwd = passwordtext.getText();
+        String gender = gendertext.getText();
+        String showusername = usernametext.getText();
+        String usertype = usertypetext.getText();
+        int useractive = parseInt(activetext.getText());
+        String phone = phonetext.getText();
 
 //storing query to be executedinto a String 
-            String query1 = "UPDATE USERS SET fullname = '" + userFullName + "', pswd = '" + pwd + "', gender = '" + gender + "', username = '" + showusername + "', usertype = '" + usertype + "', active = '" + useractive + "', phone = '" + phone + "' where id = " + CrossmoduleGUI.GlobalID;
-            System.out.println("query: "+query1);
-        
-            stmt = conn.createStatement();
-            stmt.executeUpdate(query1);
-           
-//        } catch (SQLException ex) {
-//            Logger.getLogger(edit.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        String query1 = "UPDATE USERS SET fullname = '" + userFullName + "', pswd = '" + pwd + "', gender = '" + gender + "', username = '" + showusername + "', usertype = '" + usertype + "', active = '" + useractive + "', phone = '" + phone + "' where id = " + CrossmoduleGUI.GlobalID;
+        System.out.println("query: " + query1);
+
+//connection database
+        stmt = conn.createStatement();
+        stmt.executeUpdate(query1);
 
     }
 
@@ -259,7 +238,8 @@ public class edit extends javax.swing.JFrame {
         } catch (SQLException ex) {
             //Logger.getLogger(edit.class.getName()).log(Level.SEVERE, null, ex);
         }
-   
+                JOptionPane.showMessageDialog(null, "User modified");
+
     }//GEN-LAST:event_modifyButtonActionPerformed
 
     private void usernametextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernametextActionPerformed

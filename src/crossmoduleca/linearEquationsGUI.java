@@ -5,10 +5,9 @@
  */
 package crossmoduleca;
 
-import javax.swing.JFrame;
+
 import static java.lang.Integer.parseInt;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -29,32 +28,21 @@ public class linearEquationsGUI extends javax.swing.JFrame {
     /**
      * Creates new form linearEquationsGUI
      */
+    
 // database connection 
     Connection conn = new MySQLConection().dbconn();
     ResultSet rs = null;
     ResultSet allUsers = null;
     Statement stmt = null;
     static int GlobalID;
-
+    
+//creating variables 
     double[][] finalNumberMatrix;
     String resultFinalToStore = "";
 
     public linearEquationsGUI() {
         initComponents();
 
-//        try {
-//database connection and query execution 
-//            stmt = conn.createStatement();
-//            allUsers = stmt.executeQuery("SELECT * FROM linearEquations");
-//                        String query ="\"INSERT INTO linearEquations (variables, result) \"\n" +
-//"                + \"VALUES (NULL,'\" + userFullName + \"','\" + showusername + \"','\" + pwd + \"','\" + usertype + \"','\" + gender + \"',\" + useractive + \",'\" + phone + \"')\";\n" +
-//"";
-//            stmt.executeUpdate(query);
-//            
-//            } catch (SQLException e) {
-//            JOptionPane.showMessageDialog(null, "An error occured while stablishing a connection with the database and doing the login. Please, try again.");
-// test purpose
-//            e.printStackTrace();
     }
 
     /**
@@ -224,13 +212,8 @@ public class linearEquationsGUI extends javax.swing.JFrame {
 
 // user-friendly message to inform the user that the variable was added to the program
             JOptionPane.showMessageDialog(null, "Number of variable was add as " + equationsNumber + ". \n Now add the values for coefficients.");
-//
-//        int number1 = Integer.parseInt(JOptionPane.showInputDialog(null,
-//                "In the following format: \n"
-//                + " ax + by + cz + ... = d "));
 
-            JOptionPane.showInputDialog("Enter the coefficientes for the variables of each equation \n the format will be: \n" + " ax + by + cz + ew... = d \n obs.: if the number is negative, add '-' before it "); //columns
-
+            
 //creating a to dimentional Array
             double[][] matrix = new double[equationsNumber][equationsNumber];
             double[][] constants = new double[equationsNumber][1];
@@ -238,10 +221,9 @@ public class linearEquationsGUI extends javax.swing.JFrame {
 //loop to display the user's input in an organized way
             for (int i = 0; i < equationsNumber; i++) {
                 for (int j = 0; j < equationsNumber; j++) {
-//                    int conefficients = parseInt(coefficientsText.getText()):
-                    matrix[i][j] = Integer.parseInt(JOptionPane.showInputDialog(null));
+                    matrix[i][j] = Integer.parseInt(JOptionPane.showInputDialog("Enter the coefficientes for the variables of equation 1 \n the format will be: \n" + " ax + by + cz + ew... = d \n obs.: if the number is negative, add '-' before it "));
                 }
-                constants[i][0] = Integer.parseInt(JOptionPane.showInputDialog(null));
+                constants[i][0] = Integer.parseInt(JOptionPane.showInputDialog("Enter the coefficientes for the variables of equation 2 \n the format will be: \n" + " ax + by + cz + ew... = d \n obs.: if the number is negative, add '-' before it "));
             }
 
             finalNumberMatrix = matrix;
@@ -264,7 +246,7 @@ public class linearEquationsGUI extends javax.swing.JFrame {
             resultLabel.setText("" + results);
 
             String inverse = "<html><body>";
-//inverse of matrix[][]
+//inverse of the matrix[][]
             double inverted_matrix[][] = invert(matrix);
 
             for (int i = 0; i < equationsNumber; ++i) {
@@ -276,7 +258,7 @@ public class linearEquationsGUI extends javax.swing.JFrame {
             }
             inverseLabel.setText("" + inverse);
 
-//Multiplication of mat inverse and constants
+//Multiplication of matrix inverse and constants
             double result[][] = new double[equationsNumber][1];
             for (int i = 0; i < equationsNumber; i++) {
                 for (int j = 0; j < 1; j++) {
@@ -286,21 +268,22 @@ public class linearEquationsGUI extends javax.swing.JFrame {
                 }
             }
             String resultFinal = "<html><body>";
-//        product, final matrix
+//       final product, the final matrix result 
 
             for (int i = 0; i < equationsNumber; i++) {
                 resultFinal += (result[i][0] + " ");
                 resultFinalToStore += (result[i][0]);
 
             }
-//        userinput.close();
             finalResult.setText("" + resultFinal);
 
             String query = "INSERT INTO linearEquations (id, variables ,result) "
                     + "VALUES (" + CrossmoduleGUI.GlobalID + ",'" + Arrays.deepToString(finalNumberMatrix) + "','" + resultFinalToStore + "')";
 
-            System.out.println("TEST: " + query);
+//         user-friendly message to inform the user that the data was added in the database
+           JOptionPane.showMessageDialog(null,"Data inserted on the database, press 'ok' and see result ");
 
+//            connection to the database
             stmt = conn.createStatement();
             stmt.executeUpdate(query);
 
