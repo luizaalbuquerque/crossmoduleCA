@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.*;
 import crossmoduleca.MySQLConection;
-import java.awt.event.ActionEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 
@@ -50,12 +49,20 @@ public class CrossmoduleGUI extends javax.swing.JFrame {
 // if it is another kind of user it will go under 'else' 
                 } else {
 
-                    //No Admin
+               if (!rs.next()) {
+
+//if (!rs.next())
+//if (user.usertype!=("admin")){
+//redirects to signup tab 
+  JOptionPane.showMessageDialog(null, "regular user, Please Log in By registring");
+                    JFrame signupGUI = new signupGUI();
+                    signupGUI.setVisible(true);
+                }
                     
                 }
 //error message 
             } else {
-                JOptionPane.showMessageDialog(null, "user invalid");
+                JOptionPane.showMessageDialog(null, "user invalid, use Sign up button to register");
             }
 //testing purpose, catch message 
         } catch (Exception e) {

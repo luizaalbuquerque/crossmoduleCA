@@ -227,6 +227,7 @@ public class loginGUI extends javax.swing.JFrame {
 
             String q = "DELETE FROM USERS where id = " + id;
             stmt.executeUpdate(q);
+    
 
              JOptionPane.showMessageDialog(null, "user deleted");
 // TODO add your handling code here:
